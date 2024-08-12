@@ -1,6 +1,9 @@
 cmake_minimum_required (VERSION 3.5)
 project (skt)
-set (skt_version "2.2.4")
+set (skt_version_major 2)
+set (skt_version_minor 2)
+set (skt_version_micro 4)
+set (skt_version "${skt_version_major}.${skt_version_minor}.${skt_version_micro}")
 
 set (SKT_DEBUG_LEVEL "0" CACHE STRING "SKT debug level")
 
@@ -13,6 +16,15 @@ add_executable(skt skt.c)
 set_target_properties(skt PROPERTIES
   VERSION "${skt_version}"
 )
+
+install (TARGETS skt RUNTIME)
+install (FILES "${PROJECT_SOURCE_DIR}/README.md" TYPE DOC)
+if (WIN32)
+  set (CPACK_PACKAGE_VERSION "${skt_version}")
+  set (CPACK_BINARY_ZIP ON)
+  set (CPACK_BINARY_NSIS OFF)
+  include(CPack)
+endif (WIN32)
 
 enable_testing()
 add_test(NAME "skt"
