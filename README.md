@@ -1,3 +1,9 @@
+IMPORTANT
+=========
+
+**This package is abandoned. It needs a maintainer who knows Sanskrit,
+C programming, and TeX.**
+
 Introduction
 ============
 
