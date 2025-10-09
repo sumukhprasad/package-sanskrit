@@ -1,9 +1,3 @@
-IMPORTANT
-=========
-
-**This package is abandoned. It needs a maintainer who knows Sanskrit,
-C programming, and TeX.**
-
 Introduction
 ============
 
@@ -45,9 +39,6 @@ bitmap font using Metafont.
 
 Installation
 ============
-
-If `sktbugxx.txt` files exist, you may want to implement any changes or
-patches first.
 
 Run the metafont program on the eight font source files (the typical
 command would be `mf "\mode=ljfour; mag=1; input skt8;"` to produce the
@@ -129,20 +120,14 @@ Metafont source file for skt font at 10pt feint slant.
 `skt*.tfm`  
 Eight .tfm font files for above.
 
-`sktbugxx.txt`  
-There may be a series of such files, where ‘xx’ is a two-digit number,
-listing reported bugs and (possibly) fixes or patches.
-
 History
 =======
 
--   Revision 1.0 1996/02/13 Charles Wikner wikner@nacdh4.nac.ac.za
--   Revision 2.0 1996/11/27 Charles Wikner wikner@nacdh4.nac.ac.za
--   Revision 2.2 2002/01/02 Charles Wikner wikner@nac.ac.za
--   Revision 2.2.1 2016/09/01 Václav Haisman vhaisman@gmail.com
+-   Revision 2.2.5 XXXX-XX-XX Sumukh Prasad
+-   Revision 2.2.4 2022-09-24 Václav Haisman vhaisman@gmail.com
+-   Revision 2.2.3 2018-02-10 Václav Haisman vhaisman@gmail.com
 -   Revision 2.2.2 2017/02/22 Václav Haisman vhaisman@gmail.com
-
-I, Václav Haisman, am only a maintainer pro tempore. If you are reading this
-and you have patches to submit and actual interest in and knowledge of
-Sanskrit and LaTeX, do not hesitate to ask for maintainership of this
-package. I will gladly pass the baton over to you.
+-   Revision 2.2.1 2016/09/01 Václav Haisman vhaisman@gmail.com
+-   Revision 2.2 2002/01/02 Charles Wikner wikner@nac.ac.za
+-   Revision 2.0 1996/11/27 Charles Wikner wikner@nacdh4.nac.ac.za
+-   Revision 1.0 1996/02/13 Charles Wikner wikner@nacdh4.nac.ac.za
