@@ -18,6 +18,7 @@
 /*      Revision 2.2.2 2017-02-22 portability and other tweaks                */
 /*      Revision 2.2.3 2018-02-10 extend working buffers ten times            */
 /*      Revision 2.2.4 2022-09-24 fix abort on MacOS X                        */
+/*      Revision 2.2.4-b 2025-11-15                                           */
 /*                                                                            */
 /*      Copyright 1996 & 2002 Charles Wikner                                  */
 /*      This program can be redistributed and/or modified under the terms     */
@@ -167,7 +168,7 @@ main(int argc,
   o_ptr = outbuf; *o_ptr = '\0';
   for (k=0; k<total_options+1; k++) option[k] = FALSE; /* disable everything  */
 
-  printf("SKT.C Version 2.2.4 2022-09-24\n");
+  printf("SKT.C Version 2.2.4-b 2025-11-15\n");
 
 #if (DEBUG == 0)
 

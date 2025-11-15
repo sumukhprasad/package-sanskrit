@@ -17,6 +17,8 @@ fi
 
 ${CC:-cc} -o skt skt.c
 
+
+
 ./skt sktdoc.skt sktdoc.tex
 
 latexmk -gg -ps sktdoc.tex
@@ -28,10 +30,14 @@ ln ./sktdoc.pdf ./ps-type1/sktdoc.pdf
 
 
 
-
 ./skt introtoskt.skt introtoskt.tex
 
+latexmk -gg -ps introtoskt.tex
+
 latexmk -g -pdf introtoskt.tex
+
+rm -f ./ps-type1/introtoskt.pdf
+ln ./introtoskt.pdf ./ps-type1/introtoskt.pdf
 
 
 chmod -R +r .
@@ -41,6 +47,7 @@ list_files() {
          \( -name '*.pfb' \
          -o -name '*.map' \
          -o -name 'sktdoc.pdf' \
+         -o -name 'introtoskt.pdf' \
          -o -name 'README' \
          \) -print
 
@@ -54,6 +61,9 @@ list_files() {
          -o -name 'sktdoc.ps' \
          -o -name 'sktdoc.pdf' \
          -o -name 'sktdoc.skt' \
+         -o -name 'introtoskt.ps' \
+         -o -name 'introtoskt.pdf' \
+         -o -name 'introtoskt.skt' \
          -o -name 'README.md' \
          -o -name 'README.pdf' \
          \) -print

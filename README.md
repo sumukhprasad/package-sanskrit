@@ -126,6 +126,7 @@ Eight .tfm font files for above.
 History
 =======
 
+-   Revision 2.2.4-b 2025-11-15 Sumukh Prasad `sumukhprasad [dot] email [at] icloud [dot] com`
 -   Revision 2.2.4 2022-09-24 Václav Haisman vhaisman@gmail.com
 -   Revision 2.2.3 2018-02-10 Václav Haisman vhaisman@gmail.com
 -   Revision 2.2.2 2017/02/22 Václav Haisman vhaisman@gmail.com
