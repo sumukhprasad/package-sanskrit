@@ -1,0 +1,904 @@
+%
+% INTROTOSKT.SKT
+%
+
+\documentclass[12pt]{article}
+\usepackage[larger,iitalic,uitalic]{skt}
+% Page size compatible both with Letter and A4 papers.
+\usepackage[paperheight=279.4mm, paperwidth=210mm]{geometry}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{mflogo}
+\providecommand{\lightgray}{\color{lightgray}}
+\usepackage{microtype}
+\usepackage{titlesec}
+
+% Tweak section title format to conserve space.
+\titleformat{\section}{\large\bfseries}{\thesection}{\parskip}{}
+% Make \section*s unnumbered.
+\setcounter{secnumdepth}{0}
+
+\DeclareFixedFont{\bigskt}{OT1}{skt}{m}{n}{46mm}
+
+% Dotted hrule.
+\makeatletter
+\newcommand{\Dotfill}{\leavevmode \cleaders \hb@xt@ .9em{\hss .\hss }\hfill \kern \z@}
+\makeatother
+\newcommand{\dotrule}{\hspace*{\fill}\parbox{0.3\textwidth}{\Dotfill}\hspace*{\fill}}
+
+\pagenumbering{skt}
+
+{\skt [0- 1+ 2+ 6+ 7+ 8+ 9+ 10+]}
+
+%\makeatletter\def\@skt#1{{\bf\small Beta - }{{}\skt\number #1}}\makeatother%%%
+
+%\addtolength{\columnsep}{-44pt}
+\parindent 0pt
+\addtolength{\parskip}{2mm}
+\tolerance=500
+\raggedbottom
+\hyphenpenalty=9999
+
+% The following commands etc. are used by the sa.myoga table only.
+\newcounter{entrycount}
+\setcounter{entrycount}{0}
+\newcommand{\entrynumber}[1]%
+   {\stepcounter{entrycount}%
+    \makebox[7mm][r]{\theentrycount}%
+    \makebox[1mm][l]{\textsuperscript{#1}}}
+\newcommand{\sing}[3]%
+   {\mbox{\entrynumber{#1} \makebox[14mm][l]{#2}{#3}}\par}
+\newcommand{\dual}[4]%
+   {\mbox{\entrynumber{#1} \makebox[14mm][l]{#2}{#3}}\par%
+    \hspace*{23.5mm}\mbox{#4}\par}
+
+\title{Sanskrit for \LaTeXe{}\\Version 2\\--\\A Short Introduction and Quick Start Guide}
+\author{Charles Wikner (1996-2002)\\Václav Haisman (2016-2025)\\Sumukh Prasad (2025-present)}
+\date{}
+
+\begin{document}
+
+\begin{titlepage}
+  \maketitle
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+\section{Introduction}%
+%
+The package contains the font files and pre-processor for printing
+Sanskrit text in both {\skti devanaagarii} and transliterated Roman
+with diacritics.
+
+Some features of the {\skti devanaagarii} font:\\[2mm]
+\makebox[8mm][c]{$\bullet$}
+      Font available in three weights 
+      and two slopes.\\ 
+\makebox[8mm][c]{$\bullet$}
+      The i-hooks connect to the consonants at the correct positions.\\
+\makebox[8mm][c]{$\bullet$}
+      Accents for all {\skti Veda\/}s ({\skti .Rgveda}, {\skti Saamaveda}, 
+      {\skti Taittiriiya}), etc.\\
+\makebox[8mm][c]{$\bullet$}
+      Accent marking in colour or grey shading.\\
+\makebox[8mm][c]{$\bullet$}
+      Choice of character forms (e.g.~{\skt a\,/\,[40+]a}) and
+      {\skti sa.myoga} (e.g.~{\skt [40-]~nca\,/\,[121+]~nca[121-]}).\\
+\makebox[8mm][c]{$\bullet$}
+      Range of intra- and inter-syllable spacing.\\
+\makebox[8mm][c]{$\bullet$}
+      Dynamic option selection.
+
+Some features of the transliterated Roman:\\[2mm]
+\makebox[8mm][c]{$\bullet$}
+      Full accent marking and stacking in basic transliteration mode.\\
+\makebox[8mm][c]{$\bullet$}
+      Four `cases' (as per S.\,M.\,Katre) in technical transliteration mode.\\
+\makebox[8mm][c]{$\bullet$}
+      Each transliteration mode has four styles: Roman/italic $\times$\ 
+      bold/normal. 
+
+This document intends to serve as a short introduction and guide to get started with using \verb|CTAN:pkg/skt| for typesetting documents.
+
+\vfill
+
+\clearpage
+
+\section{Illustrations of Input and {\sktX Devanaagarii} Output}%
+%
+The following brief samples demonstrate the available styles of 
+{\skti devanaagarii\/} font and their encoding. In this mode upper 
+case characters are disallowed. 
+
+Note that the `larger' option has been selected so that, in
+this 12pt document, the {\skti devanaagarii\/} is printed at 14pt.
+
+\verb+{\+\verb+sktb  te_ja_svi naa_vadhii!tamastu|}+\hspace{2mm}
+             {\sktb  te_ja_svi naa_vadhii!tamastu|}\\[1mm]
+\verb+{\+\verb+skt   te_ja_svi naa_vadhii!tamastu|}+\hspace{2mm}
+             {\skt   te_ja_svi naa_vadhii!tamastu|}\\[1mm]
+\verb+{\+\verb+sktf  te_ja_svi naa_vadhii!tamastu|}+\hspace{2mm}
+             {\sktf  te_ja_svi naa_vadhii!tamastu|}\\[1mm]
+\verb+{\+\verb+sktbs te_ja_svi naa_vadhii!tamastu|}+\hspace{2mm}
+             {\sktbs te_ja_svi naa_vadhii!tamastu|}\\[1mm]
+\verb+{\+\verb+skts  te_ja_svi naa_vadhii!tamastu|}+\hspace{2mm}
+             {\skts  te_ja_svi naa_vadhii!tamastu|}\\[1mm]
+\verb+{\+\verb+sktfs te_ja_svi naa_vadhii!tamastu|}+\hspace{2mm}
+             {\sktfs te_ja_svi naa_vadhii!tamastu|}
+
+
+The intra- and inter-character spacing options give six steps of horizontal
+density; the extremes are:
+\vspace{-1mm}
+\begin{center}
+{\skt [1- 2- 3-] naiva ki.mcitkaromiiti yukto manyeta tattvavit|}\\[2mm]
+{\skt [1+ 2+ 3+] naiva ki.mcitkaromiiti yukto manyeta tattvavit|[1- 2- 3-]}
+\end{center}
+
+
+\section{Illustrations of Basic Transliteration}%
+%
+The same input may also be used to produce transliterated output.
+Note that the `\verb+iitalic+' option is selected, but not `\verb+xitalic+'.
+
+{\skt [6+]}
+\verb+{\+\verb+sktx te_ja_svi naa_vadhii!tamastu|}+\hspace{.8mm}
+             {\sktx te_ja_svi naa_vadhii!tamastu|}
+
+\verb+{\+\verb+sktX te_ja_svi naa_vadhii!tamastu|}+\hspace{.8mm}
+             {\sktX te_ja_svi naa_vadhii!tamastu|}
+
+\verb+{\+\verb+skti te_ja_svi naa_vadhii!tamastu|}+\hspace{.8mm}
+             {\skti te_ja_svi naa_vadhii!tamastu|}
+
+\verb+{\+\verb+sktI te_ja_svi naa_vadhii!tamastu|}+\hspace{.8mm}
+             {\sktI te_ja_svi naa_vadhii!tamastu|}
+
+It can be seen from the above examples that \verb+sktX+ is a boldface
+version of \verb+sktx+ (i.e.~also upright), and that \verb+sktI+ is
+similarly a boldface version of \verb+skti+ (also italic).
+The only difference between \verb+sktx/X+ and \verb+skti/I+ is that
+they may be independently selected as italic in the style file options.
+
+\pagebreak
+
+The Western accent marking system may also be used:\\[2mm]
+\verb+{\+\verb+skti tejasvi' naava'dhii`tamastu|}+\hspace{.8mm}
+             {\skti tejasvi' naava'dhii`tamastu|}
+
+In this basic transliteration mode (\verb+sktx/X+ or \verb+skti/I+) uppercase 
+characters are allowed: these do not affect the transliteration encoding, 
+but facilitate the printing of capital letters, for example:\\[2mm]
+\verb+{\+\verb+sktI  Bhaarate Raamo vasati}+\hspace{5mm}
+                   {\sktI  Bhaarate Raamo vasati}
+\vspace{4mm}
+
+\section{Illustrations of Technical Transliteration}%
+%
+As in the basic transliteration mode, there are four font styles selected
+through \verb+sktt/T+ or \verb+sktu/U+; however, in this mode only the
+Western accent marking is allowed. This technical (grammatical) mode
+follows the style of S\,M\,Katre in his translation of the 
+{\skti A.s.taadhyaayii}, having four `cases' of letters.
+
+Uppercase is used to indicate {\sktT _I_T\/} letters 
+(e.g.~{\skti pratyaahaara\/} {\sktT aC\/}): note that in this mode
+a {\skti mahaapraa.na spar"sa\/} (e.g.~{\skti Bha\/}) must have the 
+`{\skti h\/}' in the same case as the previous letter. In the example 
+given above, \verb+Bhaarate+ would produce an error: it needs to be 
+\verb+bhaarate+ or \verb+BHaarate+. The uppercase letters in this mode 
+are slightly smaller than those in the basic transliteration mode.
+
+In this mode only, letters may also be preceded by the underscore character
+`\verb+_+'. The effect that this has depends upon the case of the following
+letter: if the letter is lowercase, it will be underlined to indicate that
+its presence is for the sake of pronunciation only (e.g.~{\sktT jh_aL}\/);
+before an uppercase letter, it will reduce the size of the uppercase letter
+to the height of the lowercase letters to indicate technical words
+(e.g.~{\sktT _I_T\/}).
+For example, the {\skti Paa.nini suutra\/}\\[2mm]
+{\skt cajo.h ku ghi.n.nyato.h|| 7| 3| 52||}\\[2mm]
+may be encoded in the technical mode as\\[3mm]
+\verb+{\+\verb+sktT c_a-j-o.h kU GH_I_T=.NyaT-o.h}+ to produce\\[2mm]
+{\sktT c_a-j-o.h kU GH_I_T=.NyaT-o.h}\\[3mm]
+This translates as: A substitute {\sktT kU\/} replaces {\sktT c\/} or 
+{\sktT j\/} before {\sktT .NyaT\/} or [affixes]\newline\hspace*{35mm}with 
+{\sktT GH\/} as an {\sktT _I_T\/} marker.
+
+\vfill
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Getting Started with Typesetting Documents with Sanskrit for \LaTeXe{} Version 2}
+
+The pre-processor contained in \verb|skt.c|processes the source text file (with a default \verb+.skt+
+filename extension) to produce a file suitable for \LaTeXe\ (with a default
+\verb+.tex+ extension). For example, the command \verb+skt test+ will convert
+\verb+test.skt+ to \verb+test.tex+; fuller filenames may be used, 
+e.g.~\verb+skt foo.bar+ will produce \verb+foo.tex+, and 
+\verb+skt foo.bar far.boo+ will produce \verb+far.boo+ from \verb+foo.bar+.
+If no filename is specified, you will be prompted for input and output
+filenames. The pre-processor uses the Velthuis system of transliteration to process and convert text.
+
+The program passes the text from the input file to the output file
+unaltered, until it finds the string `\verb+{+\verb+\skt+'. 
+It then checks the following character(s) for the acceptable modifiers
+\verb+b f s bs fs x X i I t T u+ or \verb+U+, and this must be followed by
+a space character: if this test fails it reports an error, otherwise
+the program converts the following input text to {\skti devanaagarii\/}
+or transliteration format as required, until the matching `\verb+}+'.
+The cycle is then repeated.
+
+Within the \verb+skt+ text, the following punctuation characters will be
+passed to the output as roman:\label{ref:punct}
+
+\begin{center}
+\framebox{\texttt{ ( ) * + , - / : ; = ? }}
+\end{center}
+
+Furthermore, two successive periods `..' will be passed to the output as 
+a single roman period.  This technique of repeating the character twice 
+to produce a single roman character applies to the four characters \verb|[`']| 
+as well; and the two-character string `.!' will pass through as a single 
+roman exclamation mark.  You will need to use \verb+{+\verb+\sktx ``a'{}''}+
+to produce {\sktx ``a'{}''} (see Supplementary Notes for explanation).
+
+\LaTeX\ command strings embedded within the \verb+skt+ text will be
+passed to the output file unchanged\,---\,but beware: command parameters
+will be converted\,! Thus commands without parameters (e.g.~\verb+\clearpage+)
+are safe, but commands with parameters (e.g.~\verb+\hspace{3mm}+) will
+cause problems unless the parameters are meant to be converted
+(e.g.~\verb+\underline{naaman}+).
+
+\begin{center}
+\framebox{\begin{minipage}{100mm}
+\textbf{Note: }This program will stop passing text to the output file
+as soon as an error in the source file is detected; it will however,
+continue processing the input file until ten or more errors are 
+encountered.
+\end{minipage}}
+\end{center}
+
+For example, an end-to-end workflow can be:
+
+\begin{enumerate}
+	\item Download the repository, compile \verb|skt.c|, and move the compiled program to the same location as your \verb|*.skt| documents.
+	
+	\begin{itemize}
+		\item Your \verb|*.skt| documents MUST have \verb|\usepackage[options]{skt}| in the preamble.
+	\end{itemize}
+	
+	\item Use \verb|./skt foo.skt| to produce a corresponding \LaTeXe file.
+	
+	\item Use \verb|pdflatex foo.tex| to produce a PDF.
+
+	\item Edit your \verb|*.skt| file and repeeat steps (2) and (3) until the desired result is achieved.
+\end{enumerate}
+
+\vfill
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Examples in Typesetting {\sktI devanaagarii}}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{sktf}\\
+\texttt{"suddhabrahmaparaatpara raam ||1||}\\
+\texttt{kaalaatmakaparame"svara raam ||2||}\\
+\texttt{"se.satalpasukhanidrita raam ||3||}\\
+\texttt{brahmaadyaamarapraarthita raam ||4||}\\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\sktf 
+"suddhabrahmaparaatpara raam ||1|| \\
+kaalaatmakaparame"svara raam ||2|| \\
+"se.satalpasukhanidrita raam ||3|| \\
+brahmaadyaamarapraarthita raam ||4|| \\
+}
+\end{minipage}
+\\
+\\
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{sktfs}\\
+\texttt{ca.n.dakira.nakulama.n.dana raam ||5||} \\
+\texttt{"sriimadda"sarathanandana raam ||6||} \\
+\texttt{kausalyaasukhavardhana raam ||7||} \\
+\texttt{vi"svaamitrapriyadhana raam ||8||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\sktfs 
+ca.n.dakira.nakulama.n.dana raam ||5|| \\
+"sriimadda"sarathanandana raam ||6|| \\
+kausalyaasukhavardhana raam ||7|| \\
+vi"svaamitrapriyadhana raam ||8|| \\
+}
+\end{minipage}
+\\
+\\
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{skt}\\
+\texttt{ghorataa.takaaghaataka raam ||9||} \\
+\texttt{maariicaadinipaataka raam ||10||} \\
+\texttt{kau"sikamakhasa.mrak.saka raam ||11||} \\
+\texttt{"sriimadahalyoddhaaraka raam ||12||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\skt 
+ghorataa.takaaghaataka raam ||9|| \\
+maariicaadinipaataka raam ||10|| \\
+kau"sikamakhasa.mrak.saka raam ||11|| \\
+"sriimadahalyoddhaaraka raam ||12|| \\
+}
+\end{minipage}
+\\
+\\
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{skts}\\
+\texttt{gautamamunisa.mpuujita raam ||13||} \\
+\texttt{suramunivaraga.nasa.mstuta raam ||14||} \\
+\texttt{naavikadhaavitam.rdupada raam ||15||} \\
+\texttt{mithilaapurajanamohaka raam ||16||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\skts 
+gautamamunisa.mpuujita raam ||13|| \\
+suramunivaraga.nasa.mstuta raam ||14|| \\
+naavikadhaavitam.rdupada raam ||15|| \\
+mithilaapurajanamohaka raam ||16|| \\
+}
+\end{minipage}
+\\
+\\
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{sktb}\\
+\texttt{videhamaanasara~njaka raam ||17||} \\
+\texttt{trya.mbakakaarmukabha~njaka raam ||18||} \\
+\texttt{siitaarpitavaramaalika raam ||19||} \\
+\texttt{k.rtavaivaahikakautuka raam ||20||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\sktb 
+videhamaanasara~njaka raam ||17|| \\
+trya.mbakakaarmukabha~njaka raam ||18|| \\
+siitaarpitavaramaalika raam ||19|| \\
+k.rtavaivaahikakautuka raam ||20|| \\
+}
+\end{minipage}
+\\
+\\
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{sktbs}\\
+\texttt{bhaargavadarpavinaa"saka raam ||21||} \\
+\texttt{"sriimadayodhyaapaalaka raam ||22||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\sktbs 
+bhaargavadarpavinaa"saka raam ||21|| \\
+"sriimadayodhyaapaalaka raam ||22|| \\
+}
+\end{minipage}
+
+
+\section{Examples in Typesetting Transliterated {\sktI devanaagarii}}
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{sktx}\\
+\texttt{mudaakaraattamodaka.m sadaa vimuktisaadhaka.m} \\
+\texttt{kalaadharaavata.msaka.m vilaasilokarak.sakam |} \\
+\texttt{anaayakaikanaayaka.m vinaa"sitebhadaityaka.m} \\
+\texttt{nataa"subhaa"sunaa"saka.m namaami ta.m vinaayakam ||1||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\sktx 
+mudaakaraattamodaka.m sadaa vimuktisaadhaka.m \\
+kalaadharaavata.msaka.m vilaasilokarak.sakam | \\
+anaayakaikanaayaka.m vinaa"sitebhadaityaka.m \\
+nataa"subhaa"sunaa"saka.m namaami ta.m vinaayakam ||1|| \\
+}
+\end{minipage}
+\\
+\\
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{sktX}\\
+\texttt{natetaraatibhiikara.m navoditaarkabhaasvara.m} \\
+\texttt{namatsuraarinirjara.m nataadhikaapaduddharam |} \\
+\texttt{sure"svara.m nidhii"svara.m gaje"svara.m ga.ne"svara.m} \\
+\texttt{mahe"svara.m tamaa"sraye paraatpara.m nirantaram ||2||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\sktX 
+natetaraatibhiikara.m navoditaarkabhaasvara.m \\
+namatsuraarinirjara.m nataadhikaapaduddharam | \\
+sure"svara.m nidhii"svara.m gaje"svara.m ga.ne"svara.m \\
+mahe"svara.m tamaa"sraye paraatpara.m nirantaram ||2|| \\
+}
+\end{minipage}
+\\
+\\
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{skti}\\
+\texttt{samastaloka"sa.mkara.m nirastadaityaku~njara.m} \\
+\texttt{daretarodara.m vara.m varebhavaktramak.saram |} \\
+\texttt{k.rpaakara.m k.samaakara.m mudaakara.m ya"saskara.m} \\
+\texttt{manaskara.m namask.rtaa.m namaskaromi bhaasvaram ||3||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\skti 
+samastaloka"sa.mkara.m nirastadaityaku~njara.m \\
+daretarodara.m vara.m varebhavaktramak.saram | \\
+k.rpaakara.m k.samaakara.m mudaakara.m ya"saskara.m \\
+manaskara.m namask.rtaa.m namaskaromi bhaasvaram ||3|| \\
+}
+\end{minipage}
+\\
+\\
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{sktI}\\
+\texttt{aki.mcanaartimaarjana.m cirantanoktibhaajana.m} \\
+\texttt{puraaripuurvanandana.m suraarigarvacarva.nam |} \\
+\texttt{prapa~ncanaa"sabhii.sa.na.m dhana.mjayaadibhuu.sa.nam} \\
+\texttt{kapoladaanavaara.na.m bhaje puraa.navaara.nam ||4||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\sktI 
+aki.mcanaartimaarjana.m cirantanoktibhaajana.m \\
+puraaripuurvanandana.m suraarigarvacarva.nam | \\
+prapa~ncanaa"sabhii.sa.na.m dhana.mjayaadibhuu.sa.nam \\
+kapoladaanavaara.na.m bhaje puraa.navaara.nam ||4|| \\
+}
+\end{minipage}
+
+
+\vfill
+
+
+
+\clearpage
+
+\hspace*{10mm}%
+\begin{minipage}{122mm}
+\addtolength{\parskip}{2mm}
+\renewcommand{\baselinestretch}{1.1}
+
+\section{Sample Text from {\sktX .Rgveda 10..125..}}
+\vspace{10mm}
+
+\label{rgtext}
+{\skt [40+ 44+]
+a_ha.m 
+  ru_drebhi_rvasu!bhi"scaraamya_hamaa!di_tyairu_ta 
+  vi_"svade!vai.h|\\
+a_ha.m mi_traavaru!.no_bhaa
+  bi!bharmya_hami!ndraa_gnii 
+  a_hama_"svino_bhaa|| 1||
+
+a_ha.m soma!maaha_nasa!.m bibharmya_ha.m 
+  tva.s.taa!ramu_ta puu_.sa.na_.m bhaga!m|\\
+a_ha.m da!dhaami_ dravi!.na.m ha_vi.sma!te 
+  supraa_vye"3 yaja!maanaaya sunva_te|| 2||
+
+a_ha.m raa.s.trii! sa_.mgama!nii_ vasuu!naa.m 
+  ciki_tu.sii! pratha_maa ya_j~niiyaa!naam|\\
+taa.m maa! de_vaa vya!dadhu.h puru_traa 
+  bhuuri!sthaatraa_.m bhuuryaa!ve_"saya!ntiim|| 3||
+
+mayaa_ so anna!matti_ yo vi_pa"sya!ti_ ya.h 
+  praa.ni!ti_ ya ii!.m "s.r_.notyu_ktam|\\
+a_ma_ntavo_ maa.m ta upa! k.siyanti "sru_dhi 
+  "sru!ta "sraddhi_va.m te! vadaami|| 4||}
+
+\renewcommand{\ZK}[1]{{\lightgray #1}}
+
+{\skt 
+a_hame_va sva_yami_da.m va!daami_ ju.s.ta!.m 
+  de_vebhi!ru_ta maanu!.sebhi.h|\\
+ya.m kaa_maye_ ta.mta!mu_gra.m k.r!.nomi ta.m
+  bra_hmaa.naa_.m taam.r.si_.m ta.m su!me_dhaam|| 5||
+
+a_ha.m ru_draaya_ dhanu_raa ta!nomi 
+  brahma_dvi.se_ "sara!ve_ hanta_vaa u!|\\
+a_ha.m janaa!ya sa_ma!da.m k.r.nomya_ha.m 
+  dyaavaa!p.rthi_vii aa vi!ve"sa|| 6||
+
+a_ha.m su!ve pi_tara!masya muu_rdhanmama_ 
+  yoni!ra_psva"1nta.h sa!mu_dre|\\
+tato_ vi ti!.s.the_ bhuva_naanu_ vi"svo_taamuu.m 
+  dyaa.m va_r.sma.nopa! sp.r"saami|| 7||
+
+a_hame_va vaata! iva_ pra 
+  vaa!myaa_rabha!maa.naa_ 
+  bhuva!naani_ vi"sva!|\\
+pa_ro di_vaa pa_ra e_naa p.r!thivyaitaava!tii 
+  mahi_naa sa.m ba!bhuuva|| 8||[40-43-]
+
+}
+
+\renewcommand{\baselinestretch}{1}
+\addtolength{\parskip}{-2mm}
+\end{minipage}
+
+\clearpage
+
+\clearpage
+
+\hspace*{10mm}%
+\begin{minipage}{122mm}
+\addtolength{\parskip}{4mm}
+\renewcommand{\baselinestretch}{1.2}
+
+\section{Sample Text from {\sktX Saamaveda}}
+\vspace{6mm}
+
+{\sktI Saamaveda Sa.mhitaa} ({\skti Kauthuma\/}), verses 523--528.
+\vspace{15mm}
+
+{\skt [0- 2+ 5+ 8+ 9+ 10+ 40+ 41+ 44+ 112+ 166+]}
+
+{\skt 
+pra<1> tu dra<2r>va<3> pa<2>ri<3> ko<2>"sa<3>.m ni<1> 
+   .sii<2>da<3> n.r<1>bhi<2>.h punaa<3>no<2> a<3>bhi<1> 
+   vaaja<2r>mar.sa| \\
+a<2>"sva<3>.m na<1> tvaa<2> vaa<3>ji<1>na<2>.m 
+   ma<3>rja<2>ya<3>nto<1>.acchaa<2> va<3>rhii<1> 
+   ra<2>"sa<3>naa<1>bhi<2>rnayanti|| 523||
+
+pra<1> kaavya<2r>mu<3>"sa<1>ne<2>va 
+   bru<3>vaa.no<2> de<3>vo<2> de<3>vaa<2>naa<3>.m 
+   ja<1>ni<2>maa vivakti| \\
+ma<1>hi<2>vrata<3>.h "su<1>ci<2>bandhu.h 
+   paava<3>ka<2>.h pa<3>daa<1> va<2>raa<3>ho<2> 
+   a<3k>bhye<2r>ti<3> re<1>bha<2>n|| 524||
+
+ti<3>sro<1> vaaca<2r> iirayati<3> pra<1> 
+   vahni<2r>r.r<3>ta<1>sya<2> 
+   dhii<3>ti<1>.m brahma<2r>.no manii<3>.saa<2>m| \\
+gaa<1>vo<2> yanti<3> go<1>pa<2>ti.m p.r<3>ccha<2>maa<2>naa<3>.h 
+   so<1>ma<2>.m yanti ma<3>ta<1>yo<2> vaava"saa<3>naa<2>.h|| 525||
+
+a<3>sya<2> pre<3>.saa<2> he<3>ma<1>naa<2> 
+   puu<3>ya<1>maa<2>no de<3>vo<2> de<3>ve<2>bhi<3>.h 
+   sa<1>ma<2>p.rkta<3> ra<1>sa<2>m| \\
+su<3>ta<2>.h pa<3>vi<2>tra<3>.m pa<1>ryye<2>ti<3> 
+   re<1>bha<2>nmi<3>te<2>va<3> sa<1>dma<2> 
+   pa"su<3>ma<2>nti<1> ho<2>taa|| 526||
+
+so<1>ma<2>.h pavate jani<3>taa<1> ma<2>tii<3>naa<1>.m 
+   ja<2>ni<3>taa<2> di<3>vo<1> ja<2>ni<3>taa<1> 
+   p.r<2>thi<3>vyaa<2>.h| \\
+ja<3>nitaa<1>gnerja<2r>ni<3>taa<1> suurya<2r>sya 
+  jani<3>te<1>ndra<2>sya jani<3>to<1>ta vi.s.no<2r>.h|| 527||
+
+a<3>bhi<1> tri<2>p.r<3>.s.tha<1>.m v.r.sa<2r>.na.m 
+   vayo<3>dhaa<1>ma<2>"ngo<3>.si<1>.na<2>mavaava"santa<3> 
+   vaa<1>.nii<2>.h \\
+va<2>naa<3> ba<1>saa<2>no<3> va<1>ru<2>.no<3> 
+   na<2u> sindhu<3>rvi<1> ra<2>tna<3>dhaa<1>
+   da<2>yate<3> vaa<1>ryaa<2>.ni|| 528||
+
+}
+\vfill
+
+\addtolength{\parskip}{-4mm}
+\renewcommand{\baselinestretch}{1}
+\end{minipage}
+
+{\skt [0- 1+ 2+ 6+ 7+ 8+ 9+ 10+]}
+
+
+
+
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+
+\setlength{\unitlength}{1mm}
+\begin{picture}(136,192)
+\put(0,130.5){\begin{minipage}{50mm}
+\renewcommand{\arraystretch}{1.2}
+\addtolength{\tabcolsep}{-.7mm}
+\begin{tabular}{|c|c|c|}
+\hline
+{\small input} & {\small skt} & {\small skti} \\
+\hline
+{\tt a}    & {\skt a} or implicit                    & {\skti a}          \\
+{\tt aa}   & {\skt aa} or {{}\skt ;a}                & {\skti aa}         \\
+{\tt i}    & {\skt i} or {{}\skt ;i8a}               & {\skti i}          \\
+{\tt ii}   & {\skt ii} or \hspace*{1mm} {{}\skt i8\ZS{10};a} & {\skti ii} \\
+{\tt u}    & {\skt u} or \hspace*{1mm} {{}\skt u}    & {\skti u}          \\
+{\tt uu}   & {\skt uu} or \hspace*{1mm} {{}\skt U}   & {\skti uu}         \\
+{\tt .r}   & {\skt .r} or \hspace*{1mm} {{}\skt x}   & {\skti .r}         \\
+{\tt .r.r} & {\skt .r.r} or \hspace*{1mm} {{}\skt X} & {\skti .r.r}       \\
+{\tt .l}   & {\skt .l} or \hspace*{1mm} {{}\skt w}   & {\skti .l}         \\
+{\tt .l.l} & {\skt .l.l} or \hspace*{1mm} {{}\skt W} & {\skti .l.l}       \\
+{\tt e}    & {\skt e} or \hspace*{1mm} {{}\skt e}    & {\skti e}          \\
+{\tt ai}   & {\skt ai} or \hspace*{1mm} {{}\skt E}   & {\skti ai}         \\
+{\tt o}    & {\skt o} or \hspace*{1mm} {{}\skt *ea}  & {\skti o}          \\
+{\tt au}   & {\skt au} or \hspace*{1mm} {{}\skt *Ea} & {\skti au}         \\
+{\tt a.m}  & {\skt a.m}                              & {\skti a.m}        \\
+{\tt a"m}  & {\skt a"m}                              & {\skti a"m}        \\
+{\tt a\raisebox{-.35ex}{\tt \~\null}m}
+           & {\skt a~m}                              & {\skti a~m}        \\
+{\tt a.h}  & {\skt a.h}                              & {\skti a.h}        \\
+\hline
+\end{tabular}
+\end{minipage}
+}
+\put(57,102){\begin{minipage}{35mm}
+\renewcommand{\arraystretch}{1.03}
+\begin{tabular}{|c|c|c|}
+\hline
+{\small input} & {\small skt} & {\small skti} \\
+\hline
+{\tt ka}      & {\skt ka}   & {\skti ka}   \\
+{\tt kha}     & {\skt kha}  & {\skti kha}  \\
+{\tt ga}      & {\skt ga}   & {\skti ga}   \\
+{\tt gha}     & {\skt gha}  & {\skti gha}  \\
+{\tt "na}     & {\skt "na}  & {\skti "na}  \\
+{\tt ca}      & {\skt ca}   & {\skti ca}   \\
+{\tt cha}     & {\skt cha}  & {\skti cha}  \\
+{\tt ja}      & {\skt ja}   & {\skti ja}   \\
+{\tt jha}     & {\skt jha}  & {\skti jha}  \\
+{\tt \raisebox{-.35ex}{\tt \~\null}na}
+              & {\skt ~na}  & {\skti ~na}  \\
+{\tt .ta}     & {\skt .ta}  & {\skti .ta}  \\
+{\tt .tha}    & {\skt .tha} & {\skti .tha} \\
+{\tt .da}     & {\skt .da}  & {\skti .da}  \\
+{\tt .dha}    & {\skt .dha} & {\skti .dha} \\
+{\tt .na}     & {\skt .na}  & {\skti .na}  \\
+{\tt ta}      & {\skt ta}   & {\skti ta}   \\
+{\tt tha}     & {\skt tha}  & {\skti tha}  \\
+{\tt da}      & {\skt da}   & {\skti da}   \\
+{\tt dha}     & {\skt dha}  & {\skti dha}  \\
+{\tt na}      & {\skt na}   & {\skti na}   \\
+{\tt pa}      & {\skt pa}   & {\skti pa}   \\
+{\tt pha}     & {\skt pha}  & {\skti pha}  \\
+{\tt ba}      & {\skt ba}   & {\skti ba}   \\
+{\tt bha}     & {\skt bha}  & {\skti bha}  \\
+{\tt ma}      & {\skt ma}   & {\skti ma}   \\
+{\tt ya}   & {\skt ya}   & {\skti ya}   \\
+{\tt ra}   & {\skt ra}   & {\skti ra}   \\
+{\tt la}   & {\skt la}   & {\skti la}   \\
+{\tt va}   & {\skt va}   & {\skti va}   \\
+{\tt "sa}  & {\skt "sa}  & {\skti "sa}  \\
+{\tt .sa}  & {\skt .sa}  & {\skti .sa}  \\
+{\tt sa}   & {\skt sa}   & {\skti sa}   \\
+{\tt ha}   & {\skt ha}   & {\skti ha}   \\
+\hline
+\end{tabular}
+\end{minipage}}
+\put(7,39){\begin{minipage}{35mm}
+\renewcommand{\arraystretch}{1.03}
+\begin{tabular}{|c|c|c|}
+\hline
+{\small input} & {\small skt} & {\small skti} \\
+\hline
+{\tt 0}    & {\skt 0}    & {\skti 0}    \\
+{\tt 1}    & {\skt 1}    & {\skti 1}    \\
+{\tt 2}    & {\skt 2}    & {\skti 2}    \\
+{\tt 3}    & {\skt 3}    & {\skti 3}    \\
+{\tt 4}    & {\skt 4}    & {\skti 4}    \\
+{\tt 5}    & {\skt 5}    & {\skti 5}    \\
+{\tt 6}    & {\skt 6}    & {\skti 6}    \\
+{\tt 7}    & {\skt 7}    & {\skti 7}    \\
+{\tt 8}    & {\skt 8}    & {\skti 8}    \\
+{\tt 9}    & {\skt 9}    & {\skti 9}    \\
+\hline
+\end{tabular}
+\end{minipage}
+}
+\put(99,89.2){\begin{minipage}{38mm}
+\renewcommand{\arraystretch}{.95} %{1.16}
+{\skt [6+ 7+]}
+\begin{tabular}{|c|c|c|}
+\hline
+{\small input} & {\small skt} & {\small skti} \\
+\hline
+{\tt .a}      & {\relsize{-1}{{}\skt\symbol{89}}}
+                                             & {{}\skti $^\prime $}  \\
+{\tt |}       & {\relsize{-1}{\skt |}}       & {\skti |}    \\
+{\tt ||}      & {\relsize{-1}{\skt ||}}      & {\skti ||}   \\
+{\tt .o}      & {\relsize{-1}{\skt .o}}      & {\skti .o}   \\
+{\tt "h}      & {\relsize{-1}{\skt "h}}      & {\skti "h}   \\
+{\tt "da}     & {\relsize{-1}{\skt "da}}     & {\skti "da}  \\
+{\tt "dha}    & {\relsize{-1}{\skt "dha}}    & {\skti "dha} \\
+{\tt a@}      & {\relsize{-1}{\skt a@}}      & {\skti a@}   \\
+{\tt ..}      & {\relsize{-1}{\skt ..}}      & {\skti ..}   \\
+{\tt a\#}     & {\relsize{-1}{\skt a#}}      & {\skti a#}   \\
+{\tt a!}      & {\relsize{-1}{\skt a!}}      & {\skti a!}   \\
+{\tt a!!}     & {\relsize{-1}{\skt a!!}}     & {\skti a!!}  \\
+{\tt a\_}     & {\relsize{-1}{\skt a_}}      & {\skti a_}   \\
+{\tt a"1}     & {\relsize{-1}{\skt a"1}}     & {\skti a"1}\rule{0mm}{6mm} \\
+{\tt a"3}     & {\relsize{-1}{\skt a"3}}     & {\skti a"3}\rule{0mm}{6mm} \\
+{\tt a.1}     & {\relsize{-1}{\skt a.1}}     & {\skti a.1}\rule{0mm}{5mm} \\
+{\tt a.3}     & {\relsize{-1}{\skt a.3}}     & {\skti a.3}\rule{0mm}{6mm} \\
+{\tt a\^{}}   & {\relsize{-1}{\skt a^}}      & {\skti a^}\rule{0mm}{6mm} \\
+{\tt a'}      &  ---                         & {\skti a'}      \\
+{\tt a`}      &  ---                         & {\skti a`}      \\
+{\tt a<1>}    & {\relsize{-1}{\skt a<1>}}    & {\skti a<1>}    \\
+{\tt a<2>}    & {\relsize{-1}{\skt a<2>}}    & {\skti a<2>}    \\
+{\tt a<3>}    & {\relsize{-1}{\skt a<3>}}    & {\skti a<3>}    \\
+{\tt a<2r>}   & {\relsize{-1}{\skt a<2r>}}   & {\skti a<2r>}   \\
+{\tt a<2u>}   & {\relsize{-1}{\skt a<2u>}}   & {\skti a<2u>}   \\
+{\tt a<3k>}   & {\relsize{-1}{\skt a<3k>}}   & {\skti a<3k>}   \\
+{\tt a<!!>}   & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt a<!!>}}   & {\skti a<!!>}   \\
+{\tt a<u>}    & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt a<u>}}    & {\skti a<u>}    \\
+{\tt a<w>}    & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt a<w>}}    & {\skti a<w>}    \\
+{\tt a<\_>}   & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt a<_>}}    & {\skti a<_>}    \\
+{\tt a<.>}    & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt a<.>}}    & {\skti a<.>}    \\
+{\tt a<..>}   & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt a<..>}}   & {\skti a<..>}   \\
+{\tt a<!>}    & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt a<!>}}    & {\skti a<!>}    \\
+{\tt a<\^{}>} & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt a<^>}}    & {\skti a<^>}    \\
+{\tt a<s>}    & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt a<s>}}    & {\skti a<s>}    \\
+\hline
+\end{tabular}
+{\skt [6- 7-]}
+\end{minipage}
+}
+\put(45,3){\makebox(0,0){\textbf{\large Encoding and Transliteration Scheme.}}}
+\put(42,-3){\makebox(0,0){(default options)}}
+\end{picture}
+
+\clearpage
+
+
+
+
+
+
+\section{Vedic Accent Marking}%
+%
+Since the significance of the {\skti devanaagarii} accent marking may
+differ between {\skti Veda\/}s (e.g.~{\skt a!} is {\skti svarita} in
+{\skti .Rgveda}, but {\skti udaatta} in {\skti Kaa.thaka\/}), the character
+used for encoding is, where possible, vaguely similar to the form used in
+the {\skti devanaagarii}, and this form is largely retained in the 
+transliterated output. 
+\vspace{\fill}
+
+{\skt [6+ 7+]}
+\renewcommand{\arraystretch}{1}%{1.2}
+\begin{tabular}{|c|c|c|c|}
+\multicolumn{4}{c}{{\skti .Rgveda\/} etc.~marking system:} \\[.5mm]
+\multicolumn{4}{c}{use option~6 to enable these in}\\[-.5mm]
+\multicolumn{4}{c}{the basic transliteration mode.} \\[2mm]
+\hline input & skt     & skti          & sktt       \\
+\hline
+\verb+a!+    & {\skt a!}    & {\skti a!}    & error      \rule{0mm}{6.5mm} \\
+\verb+a!!+   & {\skt a!!}   & {\skti a!!}   & error      \rule{0mm}{6.5mm} \\
+\verb+a_+    & {\skt a_}    & {\skti a_}    & {\small see note} \rule{0mm}{5.5mm}\\
+\verb+a"1+   & {\skt a"1}   & {\skti a"1}   & error      \rule{0mm}{7.5mm}\\
+\verb+a"3+   & {\skt a"3}   & {\skti a"3}   & error      \rule{0mm}{7.5mm}\\
+\verb+a.1+   & {\skt a.1}   & {\skti a.1}   & error      \rule{0mm}{5.5mm}\\
+\verb+a.3+   & {\skt a.3}   & {\skti a.3}   & error      
+             \raisebox{-2.5mm}{\rule{0mm}{10mm}}\\
+\hline
+\multicolumn{4}{c}{Note: {\smaller The underscore character is}
+                   \rule{0mm}{6mm}}\\[-.8mm]
+\multicolumn{4}{c}{{\smaller is used differently in technical mode.}}\\
+\multicolumn{4}{c}{Western (and technical) marking.}\rule{0mm}{12mm} \\[2mm]
+\hline input & skt     & skti          & sktt       \\
+\hline
+\verb+a^+    & {\skt a^}    & {\skti a^}    & {\sktt a^} \rule{0mm}{7mm} \\
+\verb+a'+    & error                     & {\skti a'}    & {\sktt a'} \\
+\verb+a`+    & error                     & {\skti a`}    & {\sktt a`} \\\hline
+\end{tabular}
+%
+\hspace{\fill}
+%
+\begin{tabular}{|c|c|c|c|}
+\multicolumn{4}{c}{{\skti Saamaveda} and other accents: }\\[.5mm]
+\multicolumn{4}{c}{use option~7 to enable these in}\\[-.5mm]
+\multicolumn{4}{c}{the basic transliteration mode.} \\[2mm]
+\hline input & skt     & skti          & sktt       \\
+\hline
+\verb+a<1>+  & {\skt a<1>}   & {\skti a<1>}  & error \rule{0mm}{7mm} \\
+\verb+a<2>+  & {\skt a<2>}   & {\skti a<2>}  & error \rule{0mm}{6mm} \\
+\verb+a<3>+  & {\skt a<3>}   & {\skti a<3>}  & error \rule{0mm}{6mm} \\
+\verb+a<2r>+ & {\skt a<2r>}  & {\skti a<2r>} & error \rule{0mm}{6mm} \\
+\verb+a<2u>+ & {\skt a<2u>}  & {\skti a<2u>} & error \rule{0mm}{6mm} \\
+\verb+a<3k>+ & {\skt a<3k>}  & {\skti a<3k>} & error \rule{0mm}{6mm} \\\hline
+\verb+a<!!>+ & {\skt a<!!>}  & {\skti a<!!>} & error \rule{0mm}{7mm} \\
+\verb+a<u>+  & {\skt a<u>}   & {\skti a<u>}  & error \rule{0mm}{5mm} \\
+\verb+a<w>+  & {\skt a<w>}   & {\skti a<w>}  & error \rule{0mm}{5mm} \\
+\verb+a<_>+  & {\skt a<_>}   & {\skti a<_>}  & error \rule{0mm}{5mm} \\
+\verb+a<.>+  & {\skt a<.>}   & {\skti a<.>}  & error \rule{0mm}{5mm} \\
+\verb+a<..>+ & {\skt a<..>}  & {\skti a<..>} & error \rule{0mm}{5mm} \\
+\verb+a<!>+  & {\skt a<!>}   & {\skti a<!>}  & error \rule{0mm}{5mm} \\
+\verb+a<^>+  & {\skt a<^>}   & {\skti a<^>}  & error \rule{0mm}{5mm} \\
+\verb+a<s>+  & {\skt a<s>}   & {\skti a<s>}  & error \rule{0mm}{5mm} \\\hline
+\end{tabular}
+{\skt [6- 7-]}
+\vspace{\fill}
+
+The pre-processor only allows accents after a vowel, Vedic 
+{\skti anusvaara}, or~\verb+n+; where the vowel is nasalised 
+as well, the nasalisation must be after the accent, 
+i.e.~\verb+a_#+ to produce {\skt a_#}.
+
+The {\skti devanaagarii\/} accent marks themselves may be printed in
+colour (red is the tradition) or grey. This actually makes the text easier 
+to read: the sample text from the {\skti .Rgveda} on page~\pageref{rgtext}
+has the accents in the first four verses the default black, and in the next 
+four verses they are `lightgray' (using \verb+xcolor+).
+To set the accent colour redefine the \verb+\ZK+ command anywhere in the 
+\verb+.skt+~file as \verb+\renewcommand{\ZK}[1]{{\lightgray #1}}+ for example.
+
+In transiteration, the accents should stack correctly and track in 
+italics, e.g.:\\
+{\sktt [38+]_.r.r'#} and {\sktu _.r.r'#[38-]} (signifying a long or short 
+{\skti udaatta .r} used for pronunciation only).
+
+
+\end{document}
+

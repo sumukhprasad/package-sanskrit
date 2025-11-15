@@ -1,0 +1,904 @@
+%
+% INTROTOSKT.SKT
+%
+
+\documentclass[12pt]{article}
+\usepackage[larger,iitalic,uitalic]{skt}
+% Page size compatible both with Letter and A4 papers.
+\usepackage[paperheight=279.4mm, paperwidth=210mm]{geometry}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{mflogo}
+\providecommand{\lightgray}{\color{lightgray}}
+\usepackage{microtype}
+\usepackage{titlesec}
+
+% Tweak section title format to conserve space.
+\titleformat{\section}{\large\bfseries}{\thesection}{\parskip}{}
+% Make \section*s unnumbered.
+\setcounter{secnumdepth}{0}
+
+\DeclareFixedFont{\bigskt}{OT1}{skt}{m}{n}{46mm}
+
+% Dotted hrule.
+\makeatletter
+\newcommand{\Dotfill}{\leavevmode \cleaders \hb@xt@ .9em{\hss .\hss }\hfill \kern \z@}
+\makeatother
+\newcommand{\dotrule}{\hspace*{\fill}\parbox{0.3\textwidth}{\Dotfill}\hspace*{\fill}}
+
+\pagenumbering{skt}
+
+{\skt }
+
+%\makeatletter\def\@skt#1{{\bf\small Beta - }{{}\skt\number #1}}\makeatother%%%
+
+%\addtolength{\columnsep}{-44pt}
+\parindent 0pt
+\addtolength{\parskip}{2mm}
+\tolerance=500
+\raggedbottom
+\hyphenpenalty=9999
+
+% The following commands etc. are used by the sa.myoga table only.
+\newcounter{entrycount}
+\setcounter{entrycount}{0}
+\newcommand{\entrynumber}[1]%
+   {\stepcounter{entrycount}%
+    \makebox[7mm][r]{\theentrycount}%
+    \makebox[1mm][l]{\textsuperscript{#1}}}
+\newcommand{\sing}[3]%
+   {\mbox{\entrynumber{#1} \makebox[14mm][l]{#2}{#3}}\par}
+\newcommand{\dual}[4]%
+   {\mbox{\entrynumber{#1} \makebox[14mm][l]{#2}{#3}}\par%
+    \hspace*{23.5mm}\mbox{#4}\par}
+
+\title{Sanskrit for \LaTeXe{}\\Version 2\\--\\A Short Introduction and Quick Start Guide}
+\author{Charles Wikner (1996-2002)\\Václav Haisman (2016-2025)\\Sumukh Prasad (2025-present)}
+\date{}
+
+\begin{document}
+
+\begin{titlepage}
+  \maketitle
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+\section{Introduction}%
+%
+The package contains the font files and pre-processor for printing
+Sanskrit text in both {\skti devan\=agar\={\i}} and transliterated Roman
+with diacritics.
+
+Some features of the {\skti devan\=agar\={\i}} font:\\[2mm]
+\makebox[8mm][c]{$\bullet$}
+      Font available in three weights 
+      and two slopes.\\ 
+\makebox[8mm][c]{$\bullet$}
+      The i-hooks connect to the consonants at the correct positions.\\
+\makebox[8mm][c]{$\bullet$}
+      Accents for all {\skti Veda\/}s ({\skti \d Rgveda}, {\skti S\=amaveda}, 
+      {\skti Taittir\={\i}ya}), etc.\\
+\makebox[8mm][c]{$\bullet$}
+      Accent marking in colour or grey shading.\\
+\makebox[8mm][c]{$\bullet$}
+      Choice of character forms (e.g.~{\skt A\,\ZN{/}\,`A}) and
+      {\skti sa\d myoga} (e.g.~{\skt \ZM{BNz0dcRfA}*.a\,\ZN{/}\,Vca}).\\
+\makebox[8mm][c]{$\bullet$}
+      Range of intra- and inter-syllable spacing.\\
+\makebox[8mm][c]{$\bullet$}
+      Dynamic option selection.
+
+Some features of the transliterated Roman:\\[2mm]
+\makebox[8mm][c]{$\bullet$}
+      Full accent marking and stacking in basic transliteration mode.\\
+\makebox[8mm][c]{$\bullet$}
+      Four `cases' (as per S.\,M.\,Katre) in technical transliteration mode.\\
+\makebox[8mm][c]{$\bullet$}
+      Each transliteration mode has four styles: Roman/italic $\times$\ 
+      bold/normal. 
+
+This document intends to serve as a short introduction and guide to get started with using \verb|CTAN:pkg/skt| for typesetting documents.
+
+\vfill
+
+\clearpage
+
+\section{Illustrations of Input and {\sktX Devan\=agar\={\i}} Output}%
+%
+The following brief samples demonstrate the available styles of 
+{\skti devan\=agar\={\i}\/} font and their encoding. In this mode upper 
+case characters are disallowed. 
+
+Note that the `larger' option has been selected so that, in
+this 12pt document, the {\skti devan\=agar\={\i}\/} is printed at 14pt.
+
+\verb+{\+\verb+sktb  te_ja_svi naa_vadhii!tamastu|}+\hspace{2mm}
+             {\sktb  .te\ZK{`8}a.j\ZK{`8}a:\ZH{0}{i0//Y7}a.s1va na.\ZK{`8}a:va:Di4a.\ZK{`7}a:ta:ma:s1tua\ZS{12}@A}\\[1mm]
+\verb+{\+\verb+skt   te_ja_svi naa_vadhii!tamastu|}+\hspace{2mm}
+             {\skt  .te\ZK{`8}a.j\ZK{`8}a:\ZH{0}{i0//Y7}a.s1va na.\ZK{`8}a:va:Di4a.\ZK{`7}a:ta:ma:s1tua\ZS{12}@A}\\[1mm]
+\verb+{\+\verb+sktf  te_ja_svi naa_vadhii!tamastu|}+\hspace{2mm}
+             {\sktf  .te\ZK{`8}a.j\ZK{`8}a:\ZH{0}{i0//Y7}a.s1va na.\ZK{`8}a:va:Di4a.\ZK{`7}a:ta:ma:s1tua\ZS{12}@A}\\[1mm]
+\verb+{\+\verb+sktbs te_ja_svi naa_vadhii!tamastu|}+\hspace{2mm}
+             {\sktbs .te\ZK{`8}a.j\ZK{`8}a:\ZH{0}{i0//Y7}a.s1va na.\ZK{`8}a:va:Di4a.\ZK{`7}a:ta:ma:s1tua\ZS{12}@A}\\[1mm]
+\verb+{\+\verb+skts  te_ja_svi naa_vadhii!tamastu|}+\hspace{2mm}
+             {\skts  .te\ZK{`8}a.j\ZK{`8}a:\ZH{0}{i0//Y7}a.s1va na.\ZK{`8}a:va:Di4a.\ZK{`7}a:ta:ma:s1tua\ZS{12}@A}\\[1mm]
+\verb+{\+\verb+sktfs te_ja_svi naa_vadhii!tamastu|}+\hspace{2mm}
+             {\sktfs .te\ZK{`8}a.j\ZK{`8}a:\ZH{0}{i0//Y7}a.s1va na.\ZK{`8}a:va:Di4a.\ZK{`7}a:ta:ma:s1tua\ZS{12}@A}
+
+
+The intra- and inter-character spacing options give six steps of horizontal
+density; the extremes are:
+\vspace{-1mm}
+\begin{center}
+{\skt  .nEa;va ;Y2a;k\ZH{-12}{M}+:Y4a;.ca;tk+.=+ea;mi6a;a;Y3a;ta yua;k2+:ea ma;nyea;ta ta:t1va;Y2a;va;t,a\ZS{12}@A}\\[2mm]
+{\skt  .nEa.va ;i9ak\ZH{-12}{M}+Y1a.ca.tk;=.ea.mi3aa.Y0ata yua.k2;ea ma.nyea.ta tat1va.i9ava.t,a\ZS{12}@A}
+\end{center}
+
+
+\section{Illustrations of Basic Transliteration}%
+%
+The same input may also be used to produce transliterated output.
+Note that the `\verb+iitalic+' option is selected, but not `\verb+xitalic+'.
+
+{\skt }
+\verb+{\+\verb+sktx te_ja_svi naa_vadhii!tamastu|}+\hspace{.8mm}
+             {\sktx t\ZA{2}{e}j\ZA{2}{a}svi n\ZA{2}{\=a}vadh\ZA{1}{\={\i}}tamastu{\upshape\,$\mid$}}
+
+\verb+{\+\verb+sktX te_ja_svi naa_vadhii!tamastu|}+\hspace{.8mm}
+             {\sktX t\ZA{2}{e}j\ZA{2}{a}svi n\ZA{2}{\=a}vadh\ZA{1}{\={\i}}tamastu{\upshape\boldmath\,$\mid$}}
+
+\verb+{\+\verb+skti te_ja_svi naa_vadhii!tamastu|}+\hspace{.8mm}
+             {\skti t\ZA{2}{e}j\ZA{2}{a}svi n\ZA{2}{\=a}vadh\ZA{1}{\={\i}}tamastu{\upshape\,$\mid$}}
+
+\verb+{\+\verb+sktI te_ja_svi naa_vadhii!tamastu|}+\hspace{.8mm}
+             {\sktI t\ZA{2}{e}j\ZA{2}{a}svi n\ZA{2}{\=a}vadh\ZA{1}{\={\i}}tamastu{\upshape\boldmath\,$\mid$}}
+
+It can be seen from the above examples that \verb+sktX+ is a boldface
+version of \verb+sktx+ (i.e.~also upright), and that \verb+sktI+ is
+similarly a boldface version of \verb+skti+ (also italic).
+The only difference between \verb+sktx/X+ and \verb+skti/I+ is that
+they may be independently selected as italic in the style file options.
+
+\pagebreak
+
+The Western accent marking system may also be used:\\[2mm]
+\verb+{\+\verb+skti tejasvi' naava'dhii`tamastu|}+\hspace{.8mm}
+             {\skti tejasv\ZA{8}{{\i}} n\=av\ZA{8}{a}dh\ZA{7}{\={\i}}tamastu{\upshape\,$\mid$}}
+
+In this basic transliteration mode (\verb+sktx/X+ or \verb+skti/I+) uppercase 
+characters are allowed: these do not affect the transliteration encoding, 
+but facilitate the printing of capital letters, for example:\\[2mm]
+\verb+{\+\verb+sktI  Bhaarate Raamo vasati}+\hspace{5mm}
+                   {\sktI  Bh\=arate R\=amo vasati}
+\vspace{4mm}
+
+\section{Illustrations of Technical Transliteration}%
+%
+As in the basic transliteration mode, there are four font styles selected
+through \verb+sktt/T+ or \verb+sktu/U+; however, in this mode only the
+Western accent marking is allowed. This technical (grammatical) mode
+follows the style of S\,M\,Katre in his translation of the 
+{\skti A\d s\d t\=adhy\=ay\={\i}}, having four `cases' of letters.
+
+Uppercase is used to indicate {\sktT \ZY{I}\ZY{T}\/} letters 
+(e.g.~{\skti praty\=ah\=ara\/} {\sktT a\ZX{C}\/}): note that in this mode
+a {\skti mah\=apr\=a\d na spar\'sa\/} (e.g.~{\skti Bha\/}) must have the 
+`{\skti h\/}' in the same case as the previous letter. In the example 
+given above, \verb+Bhaarate+ would produce an error: it needs to be 
+\verb+bhaarate+ or \verb+BHaarate+. The uppercase letters in this mode 
+are slightly smaller than those in the basic transliteration mode.
+
+In this mode only, letters may also be preceded by the underscore character
+`\verb+_+'. The effect that this has depends upon the case of the following
+letter: if the letter is lowercase, it will be underlined to indicate that
+its presence is for the sake of pronunciation only (e.g.~{\sktT jh\ZW{a}\ZX{L}}\/);
+before an uppercase letter, it will reduce the size of the uppercase letter
+to the height of the lowercase letters to indicate technical words
+(e.g.~{\sktT \ZY{I}\ZY{T}\/}).
+For example, the {\skti P\=a\d nini s\=utra\/}\\[2mm]
+{\skt ..ca:ja;eaH\ZS{4} k\ZH{-12}{u} ;Y3a;Ga;NNya;ta;eaH\ZS{4}\ZS{12}@A\ZS{6}@A 7\ZS{12}@A 3\ZS{12}@A 52\ZS{12}@A\ZS{6}@A}\\[2mm]
+may be encoded in the technical mode as\\[3mm]
+\verb+{\+\verb+sktT c_a-j-o.h kU GH_I_T=.NyaT-o.h}+ to produce\\[2mm]
+{\sktT c\ZW{a}\ZN{-}j\ZN{-}o\d h k\ZX{U} \ZX{GH}\ZY{I}\ZY{T}\ZN{=}\ZX{\d N}ya\ZX{T}\ZN{-}o\d h}\\[3mm]
+This translates as: A substitute {\sktT k\ZX{U}\/} replaces {\sktT c\/} or 
+{\sktT j\/} before {\sktT \ZX{\d N}ya\ZX{T}\/} or [affixes]\newline\hspace*{35mm}with 
+{\sktT \ZX{GH}\/} as an {\sktT \ZY{I}\ZY{T}\/} marker.
+
+\vfill
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Getting Started with Typesetting Documents with Sanskrit for \LaTeXe{} Version 2}
+
+The pre-processor contained in \verb|skt.c|processes the source text file (with a default \verb+.skt+
+filename extension) to produce a file suitable for \LaTeXe\ (with a default
+\verb+.tex+ extension). For example, the command \verb+skt test+ will convert
+\verb+test.skt+ to \verb+test.tex+; fuller filenames may be used, 
+e.g.~\verb+skt foo.bar+ will produce \verb+foo.tex+, and 
+\verb+skt foo.bar far.boo+ will produce \verb+far.boo+ from \verb+foo.bar+.
+If no filename is specified, you will be prompted for input and output
+filenames. The pre-processor uses the Velthuis system of transliteration to process and convert text.
+
+The program passes the text from the input file to the output file
+unaltered, until it finds the string `\verb+{+\verb+\skt+'. 
+It then checks the following character(s) for the acceptable modifiers
+\verb+b f s bs fs x X i I t T u+ or \verb+U+, and this must be followed by
+a space character: if this test fails it reports an error, otherwise
+the program converts the following input text to {\skti devan\=agar\={\i}\/}
+or transliteration format as required, until the matching `\verb+}+'.
+The cycle is then repeated.
+
+Within the \verb+skt+ text, the following punctuation characters will be
+passed to the output as roman:\label{ref:punct}
+
+\begin{center}
+\framebox{\texttt{ ( ) * + , - / : ; = ? }}
+\end{center}
+
+Furthermore, two successive periods `..' will be passed to the output as 
+a single roman period.  This technique of repeating the character twice 
+to produce a single roman character applies to the four characters \verb|[`']| 
+as well; and the two-character string `.!' will pass through as a single 
+roman exclamation mark.  You will need to use \verb+{+\verb+\sktx ``a'{}''}+
+to produce {\sktx `\ZA{8}{a}'} (see Supplementary Notes for explanation).
+
+\LaTeX\ command strings embedded within the \verb+skt+ text will be
+passed to the output file unchanged\,---\,but beware: command parameters
+will be converted\,! Thus commands without parameters (e.g.~\verb+\clearpage+)
+are safe, but commands with parameters (e.g.~\verb+\hspace{3mm}+) will
+cause problems unless the parameters are meant to be converted
+(e.g.~\verb+\underline{naaman}+).
+
+\begin{center}
+\framebox{\begin{minipage}{100mm}
+\textbf{Note: }This program will stop passing text to the output file
+as soon as an error in the source file is detected; it will however,
+continue processing the input file until ten or more errors are 
+encountered.
+\end{minipage}}
+\end{center}
+
+For example, an end-to-end workflow can be:
+
+\begin{enumerate}
+	\item Download the repository, compile \verb|skt.c|, and move the compiled program to the same location as your \verb|*.skt| documents.
+	
+	\begin{itemize}
+		\item Your \verb|*.skt| documents MUST have \verb|\usepackage[options]{skt}| in the preamble.
+	\end{itemize}
+	
+	\item Use \verb|./skt foo.skt| to produce a corresponding \LaTeXe file.
+	
+	\item Use \verb|pdflatex foo.tex| to produce a PDF.
+
+	\item Edit your \verb|*.skt| file and repeeat steps (2) and (3) until the desired result is achieved.
+\end{enumerate}
+
+\vfill
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Examples in Typesetting {\sktI devan\=agar\={\i}}}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{sktf}\\
+\texttt{"suddhabrahmaparaatpara raam ||1||}\\
+\texttt{kaalaatmakaparame"svara raam ||2||}\\
+\texttt{"se.satalpasukhanidrita raam ||3||}\\
+\texttt{brahmaadyaamarapraarthita raam ||4||}\\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\sktf 
+Zua:;d\ZM{t0Dj0b};b.ra;h2;pa:=+a;tpa:= .=+a;m,a \ZS{12}@A\ZS{6}@A1\ZS{12}@A\ZS{6}@A \\
+k+:a;l+.a;tma;k+:pa:=+mea:(\ZM{dGu};a:= .=+a;m,a \ZS{12}@A\ZS{6}@A2\ZS{12}@A\ZS{6}@A \\
+Zea;Sa;ta;l1pa;sua;Ka;Y4a;na;Y2a;d\ZP{-8}{-4}{@R}+ta .=+a;m,a \ZS{12}@A\ZS{6}@A3\ZS{12}@A\ZS{6}@A \\
+b.ra;h2;a;d\ZM{fByF0E};a;a;ma:=+pra;a;Y4a;TRa;ta .=+a;m,a \ZS{12}@A\ZS{6}@A4\ZS{12}@A\ZS{6}@A \\
+}
+\end{minipage}
+\\
+\\
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{sktfs}\\
+\texttt{ca.n.dakira.nakulama.n.dana raam ||5||} \\
+\texttt{"sriimadda"sarathanandana raam ||6||} \\
+\texttt{kausalyaasukhavardhana raam ||7||} \\
+\texttt{vi"svaamitrapriyadhana raam ||8||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\sktfs 
+..ca;Nq+.Y2a;k+.=+Na;k\ZH{-12}{u}+:l+.ma;Nq+.na .=+a;m,a \ZS{12}@A\ZS{6}@A5\ZS{12}@A\ZS{6}@A \\
+(ri6a;a;ma;d1+Za:=+Ta;na;nd;na .=+a;m,a \ZS{12}@A\ZS{6}@A6\ZS{12}@A\ZS{6}@A \\
+k+:Ea;sa;l1ya;a;sua;Ka;va;DRa;na .=+a;m,a \ZS{12}@A\ZS{6}@A7\ZS{12}@A\ZS{6}@A \\
+;Y2a;va:(\ZM{dGu};a;a;Y6a;ma:t3a;Y2a;pra;ya;Da;na .=+a;m,a \ZS{12}@A\ZS{6}@A8\ZS{12}@A\ZS{6}@A \\
+}
+\end{minipage}
+\\
+\\
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{skt}\\
+\texttt{ghorataa.takaaghaataka raam ||9||} \\
+\texttt{maariicaadinipaataka raam ||10||} \\
+\texttt{kau"sikamakhasa.mrak.saka raam ||11||} \\
+\texttt{"sriimadahalyoddhaaraka raam ||12||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\skt 
+;Ga;ea:=+ta;a;f;k+:a;Ga;a;ta;k .=+a;m,a \ZS{12}@A\ZS{6}@A9\ZS{12}@A\ZS{6}@A \\
+ma;a:=\ZH{-6}{i7}+a;.ca;a;Y2a;d;Y4a;na;pa;a;ta;k .=+a;m,a \ZS{12}@A\ZS{6}@A10\ZS{12}@A\ZS{6}@A \\
+k+:Ea;Y5a;Za;k+:ma;Ka;sMa:=+[a;k .=+a;m,a \ZS{12}@A\ZS{6}@A11\ZS{12}@A\ZS{6}@A \\
+(ri6a;a;ma;d;h;l1ya;ea:;d\ZM{t0Dj0b};a:=+k .=+a;m,a \ZS{12}@A\ZS{6}@A12\ZS{12}@A\ZS{6}@A \\
+}
+\end{minipage}
+\\
+\\
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{skts}\\
+\texttt{gautamamunisa.mpuujita raam ||13||} \\
+\texttt{suramunivaraga.nasa.mstuta raam ||14||} \\
+\texttt{naavikadhaavitam.rdupada raam ||15||} \\
+\texttt{mithilaapurajanamohaka raam ||16||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\skts 
+ga;Ea;ta;ma;mua;Y4a;na;sMa;pUa;Y6a:ja;ta .=+a;m,a \ZS{12}@A\ZS{6}@A13\ZS{12}@A\ZS{6}@A \\
+.sua:=+mua;Y4a;na;va:=+ga;Na;sMa;s1tua;ta .=+a;m,a \ZS{12}@A\ZS{6}@A14\ZS{12}@A\ZS{6}@A \\
+na;a;Y2a;va;k+:Da;a;Y2a;va;ta;m\ZV{2}{x}a;d\ZH{-10}{u};pa;d .=+a;m,a \ZS{12}@A\ZS{6}@A15\ZS{12}@A\ZS{6}@A \\
+;Y6a;ma;Y4a;Ta;l+.a;pua:=;ja;na;ma;ea;h;k .=+a;m,a \ZS{12}@A\ZS{6}@A16\ZS{12}@A\ZS{6}@A \\
+}
+\end{minipage}
+\\
+\\
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{sktb}\\
+\texttt{videhamaanasara~njaka raam ||17||} \\
+\texttt{trya.mbakakaarmukabha~njaka raam ||18||} \\
+\texttt{siitaarpitavaramaalika raam ||19||} \\
+\texttt{k.rtavaivaahikakautuka raam ||20||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\sktb 
+;Y2a;va;d\ZH{-6}{e};h;ma;a;na;sa:=;\ZM{BNz0djR0ARdA}*+;k .=+a;m,a \ZS{12}@A\ZS{6}@A17\ZS{12}@A\ZS{6}@A \\
+t3yMa;ba;k+:k+:a;mRua;k+:Ba:\ZM{BNz0djR0ARdA}*+;k .=+a;m,a \ZS{12}@A\ZS{6}@A18\ZS{12}@A\ZS{6}@A \\
+.si6a;a;ta;a;Y2a;pRa;ta;va:=+ma;a;Y4a;l+.k .=+a;m,a \ZS{12}@A\ZS{6}@A19\ZS{12}@A\ZS{6}@A \\
+k\ZH{-12}{\ZV{4}{x}}+:ta;vEa;va;a;Y2a;h;k+:k+:Ea;tua;k .=+a;m,a \ZS{12}@A\ZS{6}@A20\ZS{12}@A\ZS{6}@A \\
+}
+\end{minipage}
+\\
+\\
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{sktbs}\\
+\texttt{bhaargavadarpavinaa"saka raam ||21||} \\
+\texttt{"sriimadayodhyaapaalaka raam ||22||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\sktbs 
+Ba;a;gRa;va;d;pRa;Y2a;va;na;a;Za;k .=+a;m,a \ZS{12}@A\ZS{6}@A21\ZS{12}@A\ZS{6}@A \\
+(ri6a;a;ma;d;ya;ea;Dya;a;pa;a;l+.k .=+a;m,a \ZS{12}@A\ZS{6}@A22\ZS{12}@A\ZS{6}@A \\
+}
+\end{minipage}
+
+
+\section{Examples in Typesetting Transliterated {\sktI devan\=agar\={\i}}}
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{sktx}\\
+\texttt{mudaakaraattamodaka.m sadaa vimuktisaadhaka.m} \\
+\texttt{kalaadharaavata.msaka.m vilaasilokarak.sakam |} \\
+\texttt{anaayakaikanaayaka.m vinaa"sitebhadaityaka.m} \\
+\texttt{nataa"subhaa"sunaa"saka.m namaami ta.m vinaayakam ||1||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\sktx 
+mud\=akar\=attamodaka\d m sad\=a vimuktis\=adhaka\d m \\
+kal\=adhar\=avata\d msaka\d m vil\=asilokarak\d sakam {\upshape\,$\mid$} \\
+an\=ayakaikan\=ayaka\d m vin\=a\'sitebhadaityaka\d m \\
+nat\=a\'subh\=a\'sun\=a\'saka\d m nam\=ami ta\d m vin\=ayakam {\upshape\,$\mid\mid$}1{\upshape\,$\mid\mid$} \\
+}
+\end{minipage}
+\\
+\\
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{sktX}\\
+\texttt{natetaraatibhiikara.m navoditaarkabhaasvara.m} \\
+\texttt{namatsuraarinirjara.m nataadhikaapaduddharam |} \\
+\texttt{sure"svara.m nidhii"svara.m gaje"svara.m ga.ne"svara.m} \\
+\texttt{mahe"svara.m tamaa"sraye paraatpara.m nirantaram ||2||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\sktX 
+natetar\=atibh\={\i}kara\d m navodit\=arkabh\=asvara\d m \\
+namatsur\=arinirjara\d m nat\=adhik\=apaduddharam {\upshape\boldmath\,$\mid$} \\
+sure\'svara\d m nidh\={\i}\'svara\d m gaje\'svara\d m ga\d ne\'svara\d m \\
+mahe\'svara\d m tam\=a\'sraye par\=atpara\d m nirantaram {\upshape\boldmath\,$\mid\mid$}2{\upshape\boldmath\,$\mid\mid$} \\
+}
+\end{minipage}
+\\
+\\
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{skti}\\
+\texttt{samastaloka"sa.mkara.m nirastadaityaku~njara.m} \\
+\texttt{daretarodara.m vara.m varebhavaktramak.saram |} \\
+\texttt{k.rpaakara.m k.samaakara.m mudaakara.m ya"saskara.m} \\
+\texttt{manaskara.m namask.rtaa.m namaskaromi bhaasvaram ||3||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\skti 
+samastaloka\'sa\d mkara\d m nirastadaityaku\~njara\d m \\
+daretarodara\d m vara\d m varebhavaktramak\d saram {\upshape\,$\mid$} \\
+kr\llap{\d{\kern.51em}}p\=akara\d m k\d sam\=akara\d m mud\=akara\d m ya\'saskara\d m \\
+manaskara\d m namaskr\llap{\d{\kern.51em}}t\=a\d m namaskaromi bh\=asvaram {\upshape\,$\mid\mid$}3{\upshape\,$\mid\mid$} \\
+}
+\end{minipage}
+\\
+\\
+
+\begin{minipage}[t]{\linewidth}
+\small
+\verb+{+\verb+\+\texttt{sktI}\\
+\texttt{aki.mcanaartimaarjana.m cirantanoktibhaajana.m} \\
+\texttt{puraaripuurvanandana.m suraarigarvacarva.nam |} \\
+\texttt{prapa~ncanaa"sabhii.sa.na.m dhana.mjayaadibhuu.sa.nam} \\
+\texttt{kapoladaanavaara.na.m bhaje puraa.navaara.nam ||4||} \\
+\verb|}|
+\end{minipage}
+
+
+\begin{minipage}[t]{\linewidth}
+\small
+{\sktI 
+aki\d mcan\=artim\=arjana\d m cirantanoktibh\=ajana\d m \\
+pur\=arip\=urvanandana\d m sur\=arigarvacarva\d nam {\upshape\boldmath\,$\mid$} \\
+prapa\~ncan\=a\'sabh\={\i}\d sa\d na\d m dhana\d mjay\=adibh\=u\d sa\d nam \\
+kapolad\=anav\=ara\d na\d m bhaje pur\=a\d nav\=ara\d nam {\upshape\boldmath\,$\mid\mid$}4{\upshape\boldmath\,$\mid\mid$} \\
+}
+\end{minipage}
+
+
+\vfill
+
+
+
+\clearpage
+
+\hspace*{10mm}%
+\begin{minipage}{122mm}
+\addtolength{\parskip}{2mm}
+\renewcommand{\baselinestretch}{1.1}
+
+\section{Sample Text from {\sktX \d Rgveda 10.125.}}
+\vspace{10mm}
+
+\label{rgtext}
+{\skt 
+`A\ZH{-6}{\ZK{`8}};h\ZH{-6}{M} 
+ .r8\ZH{-4}{\ZK{`8}}+:d\ZP{-8}{-4}{@R}\ZH{-6}{e}+Y6a;B\ZK{`8}a;vRa;s\ZK{`7}ua;Y6a;Ba;(\ZM{rac0FI}a:=+a;m1y\ZK{`8}a;h;ma;\ZK{`7}a;Y2a;d\ZH{-6}{\ZK{`8}};tyEa:r8\ZH{-4}{\ZK{`8}}+:ta 
+ ;Y2a;v\ZK{`8}a:(\ZM{dGu};a;d\ZH{-6}{e}\ZH{-6}{\ZK{`7}};vEaH\ZS{4}\ZS{12}@A\\
+`A\ZH{-6}{\ZK{`8}};h\ZH{-6}{M} ;Y6a;m\ZK{`8}a:t3a;a;va:r8\ZH{-10}{\ZK{`7}}+:`Na;e\ZK{`8}a;Ba;a
+ ;Y2a;b\ZK{`7}a;Ba;m1yR\ZK{`8}a;h;Y6a;m\ZK{`7}a;nd\ZP{-8}{-4}{@R}+\ZK{`8}a;\ZM{0NgFRI0FnIFe}+;a\ZH{-6}{i6};a 
+ `A\ZH{-6}{\ZK{`8}};h;m\ZK{`8}a;\ZH{0}{i0Y7}a:(\ZM{dGu};a;na;e\ZK{`8}a;Ba;a\ZS{12}@A\ZS{6}@A 1\ZS{12}@A\ZS{6}@A
+
+`A\ZH{-6}{\ZK{`8}};h\ZH{-6}{M} .sa;ea;m\ZK{`7}a;ma;a;h\ZP{-4}{-4}{\ZK{`8}};na;sM\ZV{8}{\ZK{`7}}a ;Y2a;ba;Ba;m1yR\ZK{`8}a;h\ZH{-6}{M} 
+ tva;S1;\ZK{`7}a:=+mu\ZV{-8}{\ZK{`8}}a;ta :pU\ZV{-8}{\ZK{`8}}a;Sa;`NM\ZK{`8}a Ba;g\ZK{`7}a;m,a\ZS{12}@A\\
+`A\ZH{-6}{\ZK{`8}};h\ZH{-6}{M} d\ZH{-6}{\ZK{`7}};Da;a;Y6a;m\ZK{`8}a d\ZP{-8}{-4}{@R}+Y2a;v\ZK{`7}a;`NMa h\ZP{-4}{-4}{\ZK{`8}};Y2a;va;Sm\ZK{`7}a;tea 
+ .sua;pra;\ZK{`8}a;v.ye\ZK{`8}a\ZK{3\ZH{-12}{`7}\ZH{-8}{`8}} ya:j\ZK{`7}a;ma;a;na;a;ya .sua;nv\ZK{`8}a;tea\ZS{12}@A\ZS{6}@A 2\ZS{12}@A\ZS{6}@A
+
+`A\ZH{-6}{\ZK{`8}};h\ZH{-6}{M} .=+a;S1\ZH{-10}{r1}\ZH{-6}{i6};\ZK{`7}a .sM\ZK{`8}a;ga;m\ZK{`7}a;ni6a;\ZK{`8}a va;s\ZK{`7}Ua;na;Ma 
+ ;Y4a;.ca;Y2a;k\ZH{-8}{\ZK{`8}}+:tua;Si6a;\ZK{`7}a :pra;T\ZK{`8}a;ma;a y\ZK{`8}a::]i6a;a;ya;\ZK{`7}a;na;a;m,a\ZS{12}@A\\
+ta;Ma ma;\ZK{`7}a :d\ZH{-6}{e}\ZH{-6}{\ZK{`8}};va;a v.y\ZK{`7}a;d;DuaH\ZS{4} :pua:r8\ZH{-4}{\ZK{`8}}+.t3a;a 
+ BUa;i8a:=\ZH{-6}{\ZK{`7}}+s1Ta;a:t3a;M\ZK{`8}a BUa;ya;R\ZV{8}{\ZK{`7}}a;ve\ZK{`8}a;Za;y\ZK{`7}a;nti6a;a;m,a\ZS{12}@A\ZS{6}@A 3\ZS{12}@A\ZS{6}@A
+
+ma;ya;\ZK{`8}a .sa;ea `A;n1\ZK{`7}a;ma;Y5a:t1\ZK{`8}a ya;ea ;Y2a;v\ZK{`8}a;pa;Zy\ZK{`7}a;Y3a;t\ZK{`8}a yaH\ZS{4} 
+ :pra;a;Y5a;`N\ZK{`7}a;Y3a;t\ZK{`8}a ya I\ZH{-6}{R2}\ZV{8}{\ZH{-6}{\ZK{`7}}} Zx\ZV{-12}{\ZK{`8}}a;`Na;ea;tyu\ZV{-8}{\ZK{`8}}a;k2+:m,a\ZS{12}@A\\
+`A\ZH{-6}{\ZK{`8}};m\ZK{`8}a;nta;va;e\ZK{`8}a ma;Ma ta o+.p\ZK{`7}a ;Y6a;[a;ya;\ZH{0}{i0////Y7}a;nta (ru\ZV{-8}{\ZK{`8}}a;Y3a;Da 
+ (r\ZK{`7}ua;ta (ra;Y4a:;d\ZM{t0Dj0b}\ZP{-6}{-2}{\ZK{`8}};vMa .te\ZK{`7}a va;d;a;Y6a;ma\ZS{12}@A\ZS{6}@A 4\ZS{12}@A\ZS{6}@A}
+
+\renewcommand{\ZK}[1]{{\lightgray #1}}
+
+{\skt 
+`A\ZH{-6}{\ZK{`8}};h;me\ZK{`8}a;va .s1v\ZK{`8}a;ya;Y6a;m\ZK{`8}a;d\ZH{-6}{M} v\ZK{`7}a;d;a;Y6a;m\ZK{`8}a .jua;S1\ZH{-6}{M}\ZV{8}{\ZH{-6}{\ZK{`7}}} 
+ :d\ZH{-6}{e}\ZH{-6}{\ZK{`8}};vea;Y6a;B\ZK{`7}a:r8\ZH{-4}{\ZK{`8}}+:ta ma;a;n\ZK{`7}ua;Sea;Y6a;BaH\ZS{4}\ZS{12}@A\\
+yMa k+:\ZK{`8}a;ma;ye\ZK{`8}a tMa;t\ZK{`7}a;mu\ZV{-8}{\ZK{`8}}a;gr4Ma k\ZH{-12}{\ZK{`7}}\ZH{-12}{\ZV{4}{x}}+:`Na;ea;Y6a;ma tMa
+ b.r\ZK{`8}a;h2;a;`Na;M\ZK{`8}a ta;a;m\ZV{2}{x}a;Y2a;SM\ZK{`8}a tMa .s\ZK{`7}ua;me\ZK{`8}a;Da;a;m,a\ZS{12}@A\ZS{6}@A 5\ZS{12}@A\ZS{6}@A
+
+`A\ZH{-6}{\ZK{`8}};h\ZH{-6}{M} .r8\ZH{-4}{\ZK{`8}}+:d\ZP{-8}{-4}{@R}+a;y\ZK{`8}a ;Da;nu\ZV{-8}{\ZK{`8}}a:=+a t\ZK{`7}a;na;ea;Y6a;ma 
+ b.ra;h2\ZP{-6}{-4}{\ZK{`8}};Y2a;d\ZM{oau};Se\ZK{`8}a Za:=\ZH{-6}{\ZK{`7}}+ve\ZK{`8}a h;nt\ZK{`8}a;va;a o\ZH{-6}{\ZK{`7}}\ZS{12}@A\\
+`A\ZH{-6}{\ZK{`8}};h\ZH{-6}{M} .ja;na;\ZK{`7}a;ya .s\ZK{`8}a;m\ZK{`7}a;d\ZH{-6}{M} k\ZH{-12}{\ZV{4}{x}}+:`Na;ea;m1y\ZK{`8}a;h\ZH{-6}{M} 
+ d\ZM{fByF0E};a;a;va;\ZK{`7}a;p\ZV{4}{x}a;Y4a;T\ZK{`8}a;vi6a;a `A;a ;Y2a;v\ZK{`7}a;vea;Za\ZS{12}@A\ZS{6}@A 6\ZS{12}@A\ZS{6}@A
+
+`A\ZH{-6}{\ZK{`8}};h\ZH{-6}{M} .s\ZK{`7}ua;vea ;Y2a;p\ZK{`8}a;ta:=\ZH{-6}{\ZK{`7}}+ma;s1ya mU\ZV{-8}{\ZK{`8}}a;DRa;nm1\ZM{cLe}.a;m\ZK{`8}a 
+ ya;ea;Y4a;n\ZK{`7}a:=\ZH{-2}{\ZK{`8}}+ps1va\ZK{1\ZH{-12}{`7}\ZH{-10}{`8}}+ntaH\ZS{4} .s\ZK{`7}a;mu\ZV{-8}{\ZK{`8}}a;d\ZP{-8}{-4}{@R}\ZH{-6}{e}\ZS{12}@A\\
+ta;ta;e\ZK{`8}a ;Y2a;va ;Y3a;t\ZK{`7}a;S2\ZH{-6}{e}\ZH{-6}{\ZK{`8}} Bua;v\ZK{`8}a;na;a;nu\ZV{-8}{\ZK{`8}}a ;Y2a;va:(\ZM{dGu};a;e\ZK{`8}a;ta;a;mMUa 
+ d\ZM{fByF0E};a;Ma v\ZK{`8}a;SmRa;`Na;ea;p\ZK{`7}a .s1\ZM{cLe}.p\ZV{4}{x}a;Za;a;Y6a;ma\ZS{12}@A\ZS{6}@A 7\ZS{12}@A\ZS{6}@A
+
+`A\ZH{-6}{\ZK{`8}};h;me\ZK{`8}a;va va;a;t\ZK{`7}a I+.v\ZK{`8}a :pra 
+ va;\ZK{`7}a;m1ya;\ZK{`8}a:=+B\ZK{`7}a;ma;a;`Na;\ZK{`8}a 
+ Bua;v\ZK{`7}a;na;a;Y4a;n\ZK{`8}a ;Y2a;va:(\ZM{dGu};\ZK{`7}a\ZS{12}@A\\
+:p\ZK{`8}a:=+ea ;Y2a;d\ZH{-6}{\ZK{`8}};va;a :p\ZK{`8}a:= O;\ZH{-6}{\ZK{`8}};na;a :p\ZK{`7}\ZV{4}{x}a;Y4a;Ta;v.yEa;ta;a;v\ZK{`7}a;ti6a;a 
+ ma;Y2a;h\ZP{-4}{-4}{\ZK{`8}};na;a .sMa b\ZK{`7}a;BUa;va\ZS{12}@A\ZS{6}@A 8\ZS{12}@A\ZS{6}@A
+
+}
+
+\renewcommand{\baselinestretch}{1}
+\addtolength{\parskip}{-2mm}
+\end{minipage}
+
+\clearpage
+
+\clearpage
+
+\hspace*{10mm}%
+\begin{minipage}{122mm}
+\addtolength{\parskip}{4mm}
+\renewcommand{\baselinestretch}{1.2}
+
+\section{Sample Text from {\sktX S\=amaveda}}
+\vspace{6mm}
+
+{\sktI S\=amaveda Sa\d mhit\=a} ({\skti Kauthuma\/}), verses 523--528.
+\vspace{15mm}
+
+{\skt }
+
+{\skt 
+:pr\ZV{12}{\ZK{`1}}a tua d\ZP{-8}{-4}{@R}\ZV{12}{\ZH{-8}{\ZK{`4}}};v\ZV{12}{\ZK{`3}}a :p\ZV{12}{\ZK{`2}}a:i7a.=\ZV{12}{\ZH{-6}{\ZK{`3}}} k+.e\ZV{12}{\ZK{`2}}a:ZM\ZV{12}{\ZK{`3}}a ;Y3a:n\ZV{12}{\ZK{`1}}a 
+ :Si5a:\ZV{12}{\ZK{`2}}a:d\ZV{12}{\ZH{-6}{\ZK{`3}}} n\ZV{12}{\ZK{`1}}\ZV{4}{x}a:Y5a:B\ZV{12}{\ZK{`2}}aH\ZS{2} :pua:na:\ZV{12}{\ZK{`3}}a:na:e\ZV{12}{\ZK{`2}}a `A\ZV{12}{\ZH{-6}{\ZK{`3}}}:Y5a:B\ZV{12}{\ZK{`1}}a 
+ va:a.j\ZV{12}{\ZH{-4}{\ZK{`4}}}a:ma:SRa\ZS{12}@A \\
+`A\ZV{12}{\ZH{-6}{\ZK{`2}}}:ZvM\ZV{12}{\ZK{`3}}a n\ZV{12}{\ZK{`1}}a tva:\ZV{12}{\ZK{`2}}a va:\ZV{12}{\ZK{`3}}a:Y5a.j\ZV{12}{\ZK{`1}}a:nM\ZV{12}{\ZK{`2}}a 
+ m\ZV{12}{\ZK{`3}}a.jR\ZV{12}{\ZK{`2}}a:y\ZV{12}{\ZK{`3}}a:nta:e\ZV{12}{\ZK{`1}}aY:.cC+\ZV{12}{\ZK{`2}}a v\ZV{12}{\ZK{`3}}a:h\ZH{-6}{i5}:R\ZV{12}{\ZK{`1}}a 
+ .=\ZV{12}{\ZH{-6}{\ZK{`2}}};Z\ZV{12}{\ZK{`3}}a:na:\ZV{12}{\ZK{`1}}a:Y5a:B\ZV{12}{\ZK{`2}}a:nRa:ya:\ZH{0}{i0///Y7}a:nta\ZS{12}@A\ZS{6}@A 523\ZS{12}@A\ZS{6}@A
+
+:pr\ZV{12}{\ZK{`1}}a k+.a:v.y\ZV{12}{\ZH{-4}{\ZK{`4}}}a:m\ZV{12}{\ZK{`3}}ua:Z\ZV{12}{\ZK{`1}}a:ne\ZV{12}{\ZK{`2}}a:va 
+ b.r\ZV{12}{\ZK{`3}}ua:va:a:`Na:e\ZV{12}{\ZK{`2}}a :d\ZH{-6}{e}\ZV{12}{\ZH{-6}{\ZK{`3}}}:va:e\ZV{12}{\ZK{`2}}a :d\ZH{-6}{e}\ZV{12}{\ZH{-6}{\ZK{`3}}}:va:\ZV{12}{\ZK{`2}}a:na:M\ZV{12}{\ZK{`3}}a 
+ .j\ZV{12}{\ZK{`1}}a:Y3a:n\ZV{12}{\ZK{`2}}a:ma:a ;Y1a:va:va:Y2a:k2\ZS{12}@A \\
+m\ZV{12}{\ZK{`1}}a:Y1a:h\ZV{12}{\ZH{-6}{\ZK{`2}}}:v.ra:t\ZV{12}{\ZK{`3}}aH\ZS{2} Z\ZV{12}{\ZK{`1}}ua:Y3a:.c\ZV{12}{\ZK{`2}}a:ba:nDuaH\ZS{2} 
+ :pa:a:v\ZV{12}{\ZK{`3}}a:k\ZV{12}{\ZH{-12}{\ZK{`2}}}\ZS{2}H\ZS{2} :p\ZV{12}{\ZK{`3}}a:d:\ZV{12}{\ZK{`1}}a v\ZV{12}{\ZK{`2}}a.=;\ZV{12}{\ZK{`3}}a:h:e\ZV{12}{\ZK{`2}}a 
+ `A\ZV{12}{\ZH{-12}{\ZK{`6}}}:Bye\ZV{12}{\ZH{-4}{\ZK{`4}}}a:Y2a:t\ZV{12}{\ZK{`3}}a \ZS{2}:=\ZH{-6}{e}\ZV{12}{\ZH{-6}{\ZK{`1}}};B\ZV{12}{\ZK{`2}}a:n,a\ZS{12}@A\ZS{6}@A 524\ZS{12}@A\ZS{6}@A
+
+;Y2a:t\ZV{12}{\ZK{`3}}a:s1\ZM{aLeDDr}:a:e\ZV{12}{\ZK{`1}}a va:a:.c\ZV{12}{\ZH{-4}{\ZK{`4}}}a I\ZH{-6}{R};=;ya:Y2a:t\ZV{12}{\ZK{`3}}a :pr\ZV{12}{\ZK{`1}}a 
+ va:Y1a:h3\ZM{nCneCe}\ZV{12}{\ZH{-8}{\ZK{`4}}}+.`r\ZH{-6}{R}\ZV{12}{\ZH{-6}{\ZK{`3}}}:t\ZV{12}{\ZK{`1}}a:s1y\ZV{12}{\ZK{`2}}a 
+ ;Di5a:\ZV{12}{\ZK{`3}}a:Y2a:tM\ZV{12}{\ZK{`1}}a b.ra:h2\ZV{12}{\ZH{-10}{\ZK{`4}}}:`Na:ea ma:ni5a:\ZV{12}{\ZK{`3}}a:Sa:\ZV{12}{\ZK{`2}}a:m,a\ZS{12}@A \\
+ga:\ZV{12}{\ZK{`1}}a:va:e\ZV{12}{\ZK{`2}}a ya:\ZH{0}{i0///Y7}a:nt\ZV{12}{\ZK{`3}}a ga:e\ZV{12}{\ZK{`1}}a:p\ZV{12}{\ZK{`2}}a:Y2a:tMa :p\ZV{12}{\ZK{`3}}\ZV{4}{x}a:.cC\ZV{12}{\ZH{-6}{\ZK{`2}}}+ma:\ZV{12}{\ZK{`2}}a:na:\ZV{12}{\ZK{`3}}aH\ZS{2} 
+ .sa:e\ZV{12}{\ZK{`1}}a:mM\ZV{12}{\ZK{`2}}a ya:\ZH{0}{i0///Y7}a:nta m\ZV{12}{\ZK{`3}}a:t\ZV{12}{\ZK{`1}}a:ya:e\ZV{12}{\ZK{`2}}a va:a:va:Za:\ZV{12}{\ZK{`3}}a:na:\ZV{12}{\ZK{`2}}aH\ZS{2}\ZS{12}@A\ZS{6}@A 525\ZS{12}@A\ZS{6}@A
+
+`A\ZV{12}{\ZH{-6}{\ZK{`3}}}:s1y\ZV{12}{\ZK{`2}}a :pre\ZV{12}{\ZK{`3}}a:Sa:\ZV{12}{\ZK{`2}}a :h\ZH{-6}{e}\ZV{12}{\ZH{-6}{\ZK{`3}}}:m\ZV{12}{\ZK{`1}}a:na:\ZV{12}{\ZK{`2}}a 
+ :p\ZV{12}{\ZK{`3}}Ua:y\ZV{12}{\ZK{`1}}a:ma:\ZV{12}{\ZK{`2}}a:na:ea :d\ZH{-6}{e}\ZV{12}{\ZH{-6}{\ZK{`3}}}:va:e\ZV{12}{\ZK{`2}}a :d\ZH{-6}{e}\ZV{12}{\ZH{-6}{\ZK{`3}}}:ve\ZV{12}{\ZK{`2}}a:Y5a:B\ZV{12}{\ZK{`3}}aH\ZS{2} 
+ .s\ZV{12}{\ZK{`1}}a:m\ZV{12}{\ZK{`2}}a:p\ZV{4}{x}a:k2\ZV{12}{\ZH{-10}{\ZK{`3}}} .=\ZV{12}{\ZH{-6}{\ZK{`1}}};s\ZV{12}{\ZK{`2}}a:m,a\ZS{12}@A \\
+.s\ZV{12}{\ZK{`3}}ua:t\ZV{12}{\ZK{`2}}aH\ZS{2} :p\ZV{12}{\ZK{`3}}a:Y1a:v\ZV{12}{\ZK{`2}}a.t3M\ZV{12}{\ZK{`3}}a :p\ZV{12}{\ZK{`1}}a:yyeR\ZV{12}{\ZK{`2}}a:Y2a:t\ZV{12}{\ZK{`3}}a 
+ \ZS{2}:=\ZH{-6}{e}\ZV{12}{\ZH{-6}{\ZK{`1}}};B\ZV{12}{\ZK{`2}}a:\ZH{0}{i0//////Y7}a:nm1\ZM{cLe}.\ZV{12}{\ZK{`3}}a:te\ZV{12}{\ZK{`2}}a:v\ZV{12}{\ZK{`3}}a .s\ZV{12}{\ZK{`1}}a:d2\ZM{j0mC0eH0E}+a\ZV{12}{\ZH{-6}{\ZK{`2}}} 
+ :pa:Z\ZV{12}{\ZK{`3}}ua:m\ZV{12}{\ZK{`2}}a:\ZH{0}{i0///Y7}a:nt\ZV{12}{\ZK{`1}}a h:e\ZV{12}{\ZK{`2}}a:ta:a\ZS{12}@A\ZS{6}@A 526\ZS{12}@A\ZS{6}@A
+
+.sa:e\ZV{12}{\ZK{`1}}a:m\ZV{12}{\ZK{`2}}aH\ZS{2} :pa:va:tea .ja:Y3a:n\ZV{12}{\ZK{`3}}a:ta:\ZV{12}{\ZK{`1}}a m\ZV{12}{\ZK{`2}}a:ti5a:\ZV{12}{\ZK{`3}}a:na:M\ZV{12}{\ZK{`1}}a 
+ .j\ZV{12}{\ZK{`2}}a:Y3a:n\ZV{12}{\ZK{`3}}a:ta:\ZV{12}{\ZK{`2}}a ;Y1a:d\ZV{12}{\ZH{-6}{\ZK{`3}}}:va:e\ZV{12}{\ZK{`1}}a .j\ZV{12}{\ZK{`2}}a:Y3a:n\ZV{12}{\ZK{`3}}a:ta:\ZV{12}{\ZK{`1}}a 
+ :p\ZV{12}{\ZK{`2}}\ZV{4}{x}a:Y3a:T\ZV{12}{\ZK{`3}}a:v.ya:\ZV{12}{\ZK{`2}}aH\ZS{2}\ZS{12}@A \\
+.j\ZV{12}{\ZK{`3}}a:Y3a:na:ta:\ZV{12}{\ZK{`1}}a:gnea.jR\ZV{12}{\ZH{-4}{\ZK{`4}}}a:Y3a:n\ZV{12}{\ZK{`3}}a:ta:\ZV{12}{\ZK{`1}}a .sUa:yR\ZV{12}{\ZH{-4}{\ZK{`4}}}a:s1ya 
+ .ja:Y3a:n\ZV{12}{\ZK{`3}}a:te\ZV{12}{\ZK{`1}}a:nd\ZP{-8}{-4}{@R}\ZV{12}{\ZH{-6}{\ZK{`2}}};s1ya .ja:Y3a:n\ZV{12}{\ZK{`3}}a:ta:e\ZV{12}{\ZK{`1}}a:ta ;Y1a:va:S`Na:e\ZV{12}{\ZH{-4}{\ZK{`4}}}aH\ZS{2}\ZS{12}@A\ZS{6}@A 527\ZS{12}@A\ZS{6}@A
+
+`A\ZV{12}{\ZH{-6}{\ZK{`3}}}:Y5a:B\ZV{12}{\ZK{`1}}a ;Y1a.t3\ZV{12}{\ZK{`2}}a:p\ZV{12}{\ZK{`3}}\ZV{4}{x}a:S2\ZH{-6}{M}\ZV{12}{\ZH{-6}{\ZK{`1}}} v\ZV{4}{x}a:S\ZV{12}{\ZH{-4}{\ZK{`4}}}a:`NMa 
+ .va:ya:e\ZV{12}{\ZK{`3}}a:Da:\ZV{12}{\ZK{`1}}a:m\ZV{12}{\ZK{`2}}a:\ZM{0PqPOM0bgNaENdE}*:+e\ZV{12}{\ZK{`3}}a:Y1a:S\ZV{12}{\ZK{`1}}a:`N\ZV{12}{\ZK{`2}}a:ma:va:a:va:Za:nt\ZV{12}{\ZK{`3}}a 
+ va:\ZV{12}{\ZK{`1}}a:`Ni5a:\ZV{12}{\ZK{`2}}aH\ZS{2} \\
+v\ZV{12}{\ZK{`2}}a:na:\ZV{12}{\ZK{`3}}a b\ZV{12}{\ZK{`1}}a:sa:\ZV{12}{\ZK{`2}}a:na:e\ZV{12}{\ZK{`3}}a v\ZV{12}{\ZK{`1}}a.r8\ZV{12}{\ZH{-10}{\ZK{`2}}}+.`Na:e\ZV{12}{\ZK{`3}}a 
+ n\ZV{12}{\ZH{-4}{\ZK{`5}}}a ;Y5a:sa:nD\ZV{12}{\ZK{`3}}ua:Y1a:vR\ZV{12}{\ZK{`1}}a .=\ZV{12}{\ZH{-6}{\ZK{`2}}};t2\ZV{12}{\ZK{`3}}a:Da:\ZV{12}{\ZK{`1}}a
+ d\ZV{12}{\ZH{-6}{\ZK{`2}}}:ya:te\ZV{12}{\ZK{`3}}a va:\ZV{12}{\ZK{`1}}a:ya:R\ZV{12}{\ZK{`2}}a:Y4a:`Na\ZS{12}@A\ZS{6}@A 528\ZS{12}@A\ZS{6}@A
+
+}
+\vfill
+
+\addtolength{\parskip}{-4mm}
+\renewcommand{\baselinestretch}{1}
+\end{minipage}
+
+{\skt }
+
+
+
+
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+
+\setlength{\unitlength}{1mm}
+\begin{picture}(136,192)
+\put(0,130.5){\begin{minipage}{50mm}
+\renewcommand{\arraystretch}{1.2}
+\addtolength{\tabcolsep}{-.7mm}
+\begin{tabular}{|c|c|c|}
+\hline
+{\small input} & {\small skt} & {\small skti} \\
+\hline
+{\tt a}    & {\skt A} or implicit                    & {\skti a}          \\
+{\tt aa}   & {\skt A.a} or {{}\skt ;a}                & {\skti \=a}         \\
+{\tt i}    & {\skt I} or {{}\skt ;i8a}               & {\skti i}          \\
+{\tt ii}   & {\skt I\ZH{-6}{R}} or \hspace*{1mm} {{}\skt i8\ZS{10};a} & {\skti \={\i}} \\
+{\tt u}    & {\skt o} or \hspace*{1mm} {{}\skt u}    & {\skti u}          \\
+{\tt uu}   & {\skt `o} or \hspace*{1mm} {{}\skt U}   & {\skti \=u}         \\
+{\tt .r}   & {\skt `x} or \hspace*{1mm} {{}\skt x}   & {\skti r\llap{\d{\kern.51em}}}         \\
+{\tt .r.r} & {\skt `X} or \hspace*{1mm} {{}\skt X} & {\skti \=r\llap{\d{\kern.51em}}}       \\
+{\tt .l}   & {\skt `w} or \hspace*{1mm} {{}\skt w}   & {\skti \d l}         \\
+{\tt .l.l} & {\skt `W} or \hspace*{1mm} {{}\skt W} & {\skti \d{\=l}}       \\
+{\tt e}    & {\skt O;} or \hspace*{1mm} {{}\skt e}    & {\skti e}          \\
+{\tt ai}   & {\skt Oe;} or \hspace*{1mm} {{}\skt E}   & {\skti ai}         \\
+{\tt o}    & {\skt A.ea} or \hspace*{1mm} {{}\skt *ea}  & {\skti o}          \\
+{\tt au}   & {\skt A.Ea} or \hspace*{1mm} {{}\skt *Ea} & {\skti au}         \\
+{\tt a.m}  & {\skt A\ZH{-6}{M}}                              & {\skti a\d m}        \\
+{\tt a"m}  & {\skt A\ZH{-6}{M}}                              & {\skti a\.m}        \\
+{\tt a\raisebox{-.35ex}{\tt \~\null}m}
+           & {\skt A>}                              & {\skti a\d{\~m}}        \\
+{\tt a.h}  & {\skt AH\ZS{2}}                              & {\skti a\d h}        \\
+\hline
+\end{tabular}
+\end{minipage}
+}
+\put(57,102){\begin{minipage}{35mm}
+\renewcommand{\arraystretch}{1.03}
+\begin{tabular}{|c|c|c|}
+\hline
+{\small input} & {\small skt} & {\small skti} \\
+\hline
+{\tt ka}      & {\skt k}   & {\skti ka}   \\
+{\tt kha}     & {\skt Ka}  & {\skti kha}  \\
+{\tt ga}      & {\skt ga}   & {\skti ga}   \\
+{\tt gha}     & {\skt ;Ga}  & {\skti gha}  \\
+{\tt "na}     & {\skt .z}  & {\skti \.na}  \\
+{\tt ca}      & {\skt ..ca}   & {\skti ca}   \\
+{\tt cha}     & {\skt C}  & {\skti cha}  \\
+{\tt ja}      & {\skt .ja}   & {\skti ja}   \\
+{\tt jha}     & {\skt Ja}  & {\skti jha}  \\
+{\tt \raisebox{-.35ex}{\tt \~\null}na}
+              & {\skt Va}  & {\skti \~na}  \\
+{\tt .ta}     & {\skt f}  & {\skti \d ta}  \\
+{\tt .tha}    & {\skt F} & {\skti \d tha} \\
+{\tt .da}     & {\skt .q}  & {\skti \d da}  \\
+{\tt .dha}    & {\skt Q} & {\skti \d dha} \\
+{\tt .na}     & {\skt :Na}  & {\skti \d na}  \\
+{\tt ta}      & {\skt ta}   & {\skti ta}   \\
+{\tt tha}     & {\skt Ta}  & {\skti tha}  \\
+{\tt da}      & {\skt d}   & {\skti da}   \\
+{\tt dha}     & {\skt ;Da}  & {\skti dha}  \\
+{\tt na}      & {\skt na}   & {\skti na}   \\
+{\tt pa}      & {\skt :pa}   & {\skti pa}   \\
+{\tt pha}     & {\skt :P}  & {\skti pha}  \\
+{\tt ba}      & {\skt ba}   & {\skti ba}   \\
+{\tt bha}     & {\skt Ba}  & {\skti bha}  \\
+{\tt ma}      & {\skt ma}   & {\skti ma}   \\
+{\tt ya}   & {\skt ya}   & {\skti ya}   \\
+{\tt ra}   & {\skt .=}   & {\skti ra}   \\
+{\tt la}   & {\skt l}   & {\skti la}   \\
+{\tt va}   & {\skt va}   & {\skti va}   \\
+{\tt "sa}  & {\skt Za}  & {\skti \'sa}  \\
+{\tt .sa}  & {\skt :Sa}  & {\skti \d sa}  \\
+{\tt sa}   & {\skt .sa}   & {\skti sa}   \\
+{\tt ha}   & {\skt h}   & {\skti ha}   \\
+\hline
+\end{tabular}
+\end{minipage}}
+\put(7,39){\begin{minipage}{35mm}
+\renewcommand{\arraystretch}{1.03}
+\begin{tabular}{|c|c|c|}
+\hline
+{\small input} & {\small skt} & {\small skti} \\
+\hline
+{\tt 0}    & {\skt 0}    & {\skti 0}    \\
+{\tt 1}    & {\skt 1}    & {\skti 1}    \\
+{\tt 2}    & {\skt 2}    & {\skti 2}    \\
+{\tt 3}    & {\skt 3}    & {\skti 3}    \\
+{\tt 4}    & {\skt 4}    & {\skti 4}    \\
+{\tt 5}    & {\skt 5}    & {\skti 5}    \\
+{\tt 6}    & {\skt 6}    & {\skti 6}    \\
+{\tt 7}    & {\skt 7}    & {\skti 7}    \\
+{\tt 8}    & {\skt 8}    & {\skti 8}    \\
+{\tt 9}    & {\skt 9}    & {\skti 9}    \\
+\hline
+\end{tabular}
+\end{minipage}
+}
+\put(99,89.2){\begin{minipage}{38mm}
+\renewcommand{\arraystretch}{.95} %{1.16}
+{\skt }
+\begin{tabular}{|c|c|c|}
+\hline
+{\small input} & {\small skt} & {\small skti} \\
+\hline
+{\tt .a}      & {\relsize{-1}{{}\skt\symbol{89}}}
+                                             & {{}\skti $^\prime $}  \\
+{\tt |}       & {\relsize{-1}{\skt \ZS{12}@A}}       & {\skti {\upshape\,$\mid$}}    \\
+{\tt ||}      & {\relsize{-1}{\skt \ZS{12}@A\ZS{6}@A}}      & {\skti {\upshape\,$\mid\mid$}}   \\
+{\tt .o}      & {\relsize{-1}{\skt ?}}      & {\skti O\~m}   \\
+{\tt "h}      & {\relsize{-1}{\skt H1}}      & {\skti \ZZ h}   \\
+{\tt "da}     & {\relsize{-1}{\skt L}}     & {\skti \ZZ da}  \\
+{\tt "dha}    & {\relsize{-1}{\skt L1h}}    & {\skti \ZZ dha} \\
+{\tt a@}      & {\relsize{-1}{\skt A\ZM{FTV}\ZS{20}}}      & {\skti a{\upshape$^\circ$}}   \\
+{\tt ..}      & {\relsize{-1}{\skt \ZN{.}}}      & {\skti .}   \\
+{\tt a\#}     & {\relsize{-1}{\skt A\ZH{-6}{<}}}      & {\skti \ZA{30}{a}}   \\
+{\tt a!}      & {\relsize{-1}{\skt A\ZH{-6}{\ZK{`7}}}}      & {\skti \ZA{1}{a}}   \\
+{\tt a!!}     & {\relsize{-1}{\skt A\ZH{-9}{\ZK{`7}}\ZH{-3}{\ZK{`7}}}}     & {\skti \ZA{6}{a}}  \\
+{\tt a\_}     & {\relsize{-1}{\skt A\ZH{-6}{\ZK{`8}}}}      & {\skti \ZA{2}{a}}   \\
+{\tt a"1}     & {\relsize{-1}{\skt A\ZK{1\ZH{-12}{`7}\ZH{-10}{`8}}}}     & {\skti \ZA{4}{a}}\rule{0mm}{6mm} \\
+{\tt a"3}     & {\relsize{-1}{\skt A\ZH{-6}{\ZK{`8}}\ZK{3\ZH{-12}{`7}\ZH{-8}{`8}}}}     & {\skti \ZA{3}{a}}\rule{0mm}{6mm} \\
+{\tt a.1}     & {\relsize{-1}{\skt A\ZK{1\ZH{-10}{`8}}}}     & {\skti \ZA{15}{a}}\rule{0mm}{5mm} \\
+{\tt a.3}     & {\relsize{-1}{\skt A\ZK{3\ZH{-12}{`7}\ZH{-8}{`8}}}}     & {\skti \ZA{16}{a}}\rule{0mm}{6mm} \\
+{\tt a\^{}}   & {\relsize{-1}{\skt A\ZH{-6}{\ZK{`0}}}}      & {\skti \ZA{5}{a}}\rule{0mm}{6mm} \\
+{\tt a'}      &  ---                         & {\skti \ZA{8}{a}}      \\
+{\tt a`}      &  ---                         & {\skti \ZA{7}{a}}      \\
+{\tt a<1>}    & {\relsize{-1}{\skt A\ZH{-6}{\ZK{`1}}}}    & {\skti \ZA{9}{a}}    \\
+{\tt a<2>}    & {\relsize{-1}{\skt A\ZH{-6}{\ZK{`2}}}}    & {\skti \ZA{10}{a}}    \\
+{\tt a<3>}    & {\relsize{-1}{\skt A\ZH{-6}{\ZK{`3}}}}    & {\skti \ZA{11}{a}}    \\
+{\tt a<2r>}   & {\relsize{-1}{\skt A\ZH{-10}{\ZK{`4}}}}   & {\skti \ZA{12}{a}}   \\
+{\tt a<2u>}   & {\relsize{-1}{\skt A\ZH{-10}{\ZK{`5}}}}   & {\skti \ZA{13}{a}}   \\
+{\tt a<3k>}   & {\relsize{-1}{\skt A\ZH{-12}{\ZK{`6}}}}   & {\skti \ZA{14}{a}}   \\
+{\tt a<!!>}   & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt A\ZH{-11}{\ZK{`!}}}}   & {\skti \ZA{25}{a}}   \\
+{\tt a<u>}    & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt A\ZH{-6}{\ZK{`u}}}}    & {\skti \ZA{17}{a}}    \\
+{\tt a<w>}    & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt A\ZH{-6}{\ZK{`z}}}}    & {\skti \ZA{18}{a}}    \\
+{\tt a<\_>}   & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt A\ZP{-16}{-10}{\ZK{@I@o}}}}    & {\skti \ZA{19}{a}}    \\
+{\tt a<.>}    & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt A\ZP{-8}{-10}{\ZK{@M}}}}    & {\skti \ZA{20}{a}}    \\
+{\tt a<..>}   & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt A\ZP{-8}{-10}{\ZK{@M\ZS{-9}@M}}}}   & {\skti \ZA{21}{a}}   \\
+{\tt a<!>}    & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt A\ZP{-6}{-12}{\ZK{@I\ZV{2}{@I}}}}}    & {\skti \ZA{22}{a}}    \\
+{\tt a<\^{}>} & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt A\ZP{-6}{-16}{\ZK{@r\ZP{-3}{5}{@b}\ZV{2}{@b}}}}}    & {\skti \ZA{24}{a}}    \\
+{\tt a<s>}    & \raisebox{0mm}[\height][0mm]{\relsize{-1}{\skt A\ZK{`s}}}    & {\skti \ZA{23}{a}}    \\
+\hline
+\end{tabular}
+{\skt }
+\end{minipage}
+}
+\put(45,3){\makebox(0,0){\textbf{\large Encoding and Transliteration Scheme.}}}
+\put(42,-3){\makebox(0,0){(default options)}}
+\end{picture}
+
+\clearpage
+
+
+
+
+
+
+\section{Vedic Accent Marking}%
+%
+Since the significance of the {\skti devan\=agar\={\i}} accent marking may
+differ between {\skti Veda\/}s (e.g.~{\skt A\ZH{-6}{\ZK{`7}}} is {\skti svarita} in
+{\skti \d Rgveda}, but {\skti ud\=atta} in {\skti K\=a\d thaka\/}), the character
+used for encoding is, where possible, vaguely similar to the form used in
+the {\skti devan\=agar\={\i}}, and this form is largely retained in the 
+transliterated output. 
+\vspace{\fill}
+
+{\skt }
+\renewcommand{\arraystretch}{1}%{1.2}
+\begin{tabular}{|c|c|c|c|}
+\multicolumn{4}{c}{{\skti \d Rgveda\/} etc.~marking system:} \\[.5mm]
+\multicolumn{4}{c}{use option~6 to enable these in}\\[-.5mm]
+\multicolumn{4}{c}{the basic transliteration mode.} \\[2mm]
+\hline input & skt     & skti          & sktt       \\
+\hline
+\verb+a!+    & {\skt A\ZH{-6}{\ZK{`7}}}    & {\skti \ZA{1}{a}}    & error      \rule{0mm}{6.5mm} \\
+\verb+a!!+   & {\skt A\ZH{-9}{\ZK{`7}}\ZH{-3}{\ZK{`7}}}   & {\skti \ZA{6}{a}}   & error      \rule{0mm}{6.5mm} \\
+\verb+a_+    & {\skt A\ZH{-6}{\ZK{`8}}}    & {\skti \ZA{2}{a}}    & {\small see note} \rule{0mm}{5.5mm}\\
+\verb+a"1+   & {\skt A\ZK{1\ZH{-12}{`7}\ZH{-10}{`8}}}   & {\skti \ZA{4}{a}}   & error      \rule{0mm}{7.5mm}\\
+\verb+a"3+   & {\skt A\ZH{-6}{\ZK{`8}}\ZK{3\ZH{-12}{`7}\ZH{-8}{`8}}}   & {\skti \ZA{3}{a}}   & error      \rule{0mm}{7.5mm}\\
+\verb+a.1+   & {\skt A\ZK{1\ZH{-10}{`8}}}   & {\skti \ZA{15}{a}}   & error      \rule{0mm}{5.5mm}\\
+\verb+a.3+   & {\skt A\ZK{3\ZH{-12}{`7}\ZH{-8}{`8}}}   & {\skti \ZA{16}{a}}   & error      
+             \raisebox{-2.5mm}{\rule{0mm}{10mm}}\\
+\hline
+\multicolumn{4}{c}{Note: {\smaller The underscore character is}
+                   \rule{0mm}{6mm}}\\[-.8mm]
+\multicolumn{4}{c}{{\smaller is used differently in technical mode.}}\\
+\multicolumn{4}{c}{Western (and technical) marking.}\rule{0mm}{12mm} \\[2mm]
+\hline input & skt     & skti          & sktt       \\
+\hline
+\verb+a^+    & {\skt A\ZH{-6}{\ZK{`0}}}    & {\skti \ZA{5}{a}}    & {\sktt \ZA{5}{a}} \rule{0mm}{7mm} \\
+\verb+a'+    & error                     & {\skti \ZA{8}{a}}    & {\sktt \ZA{8}{a}} \\
+\verb+a`+    & error                     & {\skti \ZA{7}{a}}    & {\sktt \ZA{7}{a}} \\\hline
+\end{tabular}
+%
+\hspace{\fill}
+%
+\begin{tabular}{|c|c|c|c|}
+\multicolumn{4}{c}{{\skti S\=amaveda} and other accents: }\\[.5mm]
+\multicolumn{4}{c}{use option~7 to enable these in}\\[-.5mm]
+\multicolumn{4}{c}{the basic transliteration mode.} \\[2mm]
+\hline input & skt     & skti          & sktt       \\
+\hline
+\verb+a<1>+  & {\skt A\ZH{-6}{\ZK{`1}}}   & {\skti \ZA{9}{a}}  & error \rule{0mm}{7mm} \\
+\verb+a<2>+  & {\skt A\ZH{-6}{\ZK{`2}}}   & {\skti \ZA{10}{a}}  & error \rule{0mm}{6mm} \\
+\verb+a<3>+  & {\skt A\ZH{-6}{\ZK{`3}}}   & {\skti \ZA{11}{a}}  & error \rule{0mm}{6mm} \\
+\verb+a<2r>+ & {\skt A\ZH{-10}{\ZK{`4}}}  & {\skti \ZA{12}{a}} & error \rule{0mm}{6mm} \\
+\verb+a<2u>+ & {\skt A\ZH{-10}{\ZK{`5}}}  & {\skti \ZA{13}{a}} & error \rule{0mm}{6mm} \\
+\verb+a<3k>+ & {\skt A\ZH{-12}{\ZK{`6}}}  & {\skti \ZA{14}{a}} & error \rule{0mm}{6mm} \\\hline
+\verb+a<!!>+ & {\skt A\ZH{-11}{\ZK{`!}}}  & {\skti \ZA{25}{a}} & error \rule{0mm}{7mm} \\
+\verb+a<u>+  & {\skt A\ZH{-6}{\ZK{`u}}}   & {\skti \ZA{17}{a}}  & error \rule{0mm}{5mm} \\
+\verb+a<w>+  & {\skt A\ZH{-6}{\ZK{`z}}}   & {\skti \ZA{18}{a}}  & error \rule{0mm}{5mm} \\
+\verb+a<_>+  & {\skt A\ZP{-16}{-10}{\ZK{@I@o}}}   & {\skti \ZA{19}{a}}  & error \rule{0mm}{5mm} \\
+\verb+a<.>+  & {\skt A\ZP{-8}{-10}{\ZK{@M}}}   & {\skti \ZA{20}{a}}  & error \rule{0mm}{5mm} \\
+\verb+a<..>+ & {\skt A\ZP{-8}{-10}{\ZK{@M\ZS{-9}@M}}}  & {\skti \ZA{21}{a}} & error \rule{0mm}{5mm} \\
+\verb+a<!>+  & {\skt A\ZP{-6}{-12}{\ZK{@I\ZV{2}{@I}}}}   & {\skti \ZA{22}{a}}  & error \rule{0mm}{5mm} \\
+\verb+a<^>+  & {\skt A\ZP{-6}{-16}{\ZK{@r\ZP{-3}{5}{@b}\ZV{2}{@b}}}}   & {\skti \ZA{24}{a}}  & error \rule{0mm}{5mm} \\
+\verb+a<s>+  & {\skt A\ZK{`s}}   & {\skti \ZA{23}{a}}  & error \rule{0mm}{5mm} \\\hline
+\end{tabular}
+{\skt }
+\vspace{\fill}
+
+The pre-processor only allows accents after a vowel, Vedic 
+{\skti anusv\=ara}, or~\verb+n+; where the vowel is nasalised 
+as well, the nasalisation must be after the accent, 
+i.e.~\verb+a_#+ to produce {\skt A\ZH{-6}{<}\ZH{-6}{\ZK{`8}}}.
+
+The {\skti devan\=agar\={\i}\/} accent marks themselves may be printed in
+colour (red is the tradition) or grey. This actually makes the text easier 
+to read: the sample text from the {\skti \d Rgveda} on page~\pageref{rgtext}
+has the accents in the first four verses the default black, and in the next 
+four verses they are `lightgray' (using \verb+xcolor+).
+To set the accent colour redefine the \verb+\ZK+ command anywhere in the 
+\verb+.skt+~file as \verb+\renewcommand{\ZK}[1]{{\lightgray #1}}+ for example.
+
+In transiteration, the accents should stack correctly and track in 
+italics, e.g.:\\
+{\sktt \ZA{68}{\ZW{\=r\llap{\d{\kern.51em}}}}} and {\sktu \ZA{68}{\ZW{\=r\llap{\d{\kern.51em}}}}} (signifying a long or short 
+{\skti ud\=atta r\llap{\d{\kern.51em}}} used for pronunciation only).
+
+
+\end{document}
+

@@ -26,6 +26,14 @@ latexmk -g -pdf sktdoc.tex
 rm -f ./ps-type1/sktdoc.pdf
 ln ./sktdoc.pdf ./ps-type1/sktdoc.pdf
 
+
+
+
+./skt introtoskt.skt introtoskt.tex
+
+latexmk -g -pdf introtoskt.tex
+
+
 chmod -R +r .
 
 list_files() {

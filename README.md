@@ -65,7 +65,7 @@ To test the setup on the documentation file: first run the pre-processor
 
 The files that you should have are:
 
-`readme.txt`  
+`readme.md`  
 This file.
 
 `skt.sty`  
@@ -79,6 +79,9 @@ Pre-processor source program in ANSI C.
 
 `sktdoc.skt`  
 Source file of documentation and samples.
+
+`introtoskt.skt`  
+Source file of introduction, quick start, and samples.
 
 `sktdoc.ps`  
 Print file of documentation and samples.
@@ -123,7 +126,6 @@ Eight .tfm font files for above.
 History
 =======
 
--   Revision 2.2.5 XXXX-XX-XX Sumukh Prasad
 -   Revision 2.2.4 2022-09-24 Václav Haisman vhaisman@gmail.com
 -   Revision 2.2.3 2018-02-10 Václav Haisman vhaisman@gmail.com
 -   Revision 2.2.2 2017/02/22 Václav Haisman vhaisman@gmail.com

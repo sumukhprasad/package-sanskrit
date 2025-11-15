@@ -1024,6 +1024,8 @@ The files in this package are:
 
 \textbf{sktdoc.skt} Source file of documentation and samples.
 
+\textbf{sktdoc.skt} Source file of the introduction and samples.
+
 \textbf{sktdefs.mf} Common definitions of pens, macros, etc.~for 
                     skt-series fonts.
 
@@ -1056,7 +1058,7 @@ The files in this package are:
                       reported bugs and (possibly) fixes or patches.
 \vspace{5mm}
 
-Suggestions and bug reports to: \verb+vhaisman@gmail.com+
+Suggestions and bug reports to: \verb|sumukhprasad [dot] email [at] icloud [dot] com|
 
 \vfill
 
