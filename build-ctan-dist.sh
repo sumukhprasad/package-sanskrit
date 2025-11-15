@@ -59,9 +59,16 @@ list_files() {
          \) -print
 }
 
+
+if command -v gtar >/dev/null 2>&1; then
+    TAR=gtar
+else
+    TAR=tar
+fi
+
 list_files | sort | \
-    tar -cvvzf sanskrit.tar.gz \
-        -T - \
-        --transform 's,^\./,sanskrit/,' \
-        --owner=sanskrit \
-        --group=ctan
+	"$TAR" -cvvzf sanskrit.tar.gz \
+		-T - \
+		--transform 's,^\./,sanskrit/,' \
+		--owner=sanskrit \
+		--group=ctan
